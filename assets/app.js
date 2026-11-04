@@ -617,6 +617,135 @@
     });
   }
 
+  function signedPct(v) {
+    if (v == null || isNaN(v)) return '—';
+    var s = (Math.round(v * 10) / 10).toFixed(1);
+    if (v > 0) return '+' + s;
+    return s.replace('-', '−');
+  }
+
+  function applyMeta() {
+    if (!D.meta) return;
+    var stamp = document.getElementById('stamp');
+    if (stamp && D.meta.stamp) stamp.textContent = D.meta.stamp;
+    var built = document.getElementById('stamp-built');
+    if (built && D.meta.builtAt) built.textContent = '页面生成：' + D.meta.builtAt;
+    var cutoff = document.getElementById('stamp-cutoff');
+    if (cutoff && D.meta.dataCutoff) cutoff.textContent = '数据截至：' + D.meta.dataCutoff;
+  }
+
+  /* ---------------- 地产固投 ---------------- */
+  function renderProperty() {
+    var pf = D.china && D.china.propertyFixed;
+    var stats = document.getElementById('property-stats');
+    if (!pf || !stats) return;
+    stats.innerHTML = '';
+    var items = [
+      { k: '房地产开发投资同比', v: signedPct(pf.reInvestYoY.value) + '%', s: pf.reInvestYoY.abs + ' 亿元 · ' + pf.period },
+      { k: '新建商品房销售面积同比', v: signedPct(pf.salesAreaYoY.value) + '%', s: pf.salesAreaYoY.abs + ' 万平方米' },
+      { k: '房屋新开工面积同比', v: signedPct(pf.newStartsYoY.value) + '%', s: pf.newStartsYoY.abs + ' 万平方米' },
+      { k: '固定资产投资同比', v: signedPct(pf.faiYoY.value) + '%', s: (pf.faiYoY.note || '不含农户') },
+      { k: '民间固定资产投资同比', v: signedPct(pf.privateFaiYoY.value) + '%', s: pf.period }
+    ];
+    items.forEach(function (s) {
+      var w = el('div', 'stat');
+      w.appendChild(el('div', 'stat-k', s.k));
+      w.appendChild(el('div', 'stat-v', s.v));
+      w.appendChild(el('div', 'stat-s', s.s));
+      stats.appendChild(w);
+    });
+
+    var t = document.getElementById('table-home-price');
+    var hp = pf.homePriceIndex;
+    if (t && hp) {
+      t.innerHTML = '';
+      var thead = el('thead');
+      var hr = el('tr');
+      ['口径', '一线 环比', '一线 同比', '二线 环比', '二线 同比', '三线 环比', '三线 同比'].forEach(function (h) {
+        hr.appendChild(el('th', '', h));
+      });
+      thead.appendChild(hr);
+      t.appendChild(thead);
+      var tbody = el('tbody');
+      [
+        ['新建商品住宅', hp.newHome.tier1, hp.newHome.tier2, hp.newHome.tier3],
+        ['二手住宅', hp.secondHand.tier1, hp.secondHand.tier2, hp.secondHand.tier3]
+      ].forEach(function (row) {
+        var tr = el('tr');
+        tr.appendChild(el('td', '', row[0]));
+        [row[1], row[2], row[3]].forEach(function (tier) {
+          tr.appendChild(el('td', '', signedPct(tier.mom)));
+          tr.appendChild(el('td', '', signedPct(tier.yoy)));
+        });
+        tbody.appendChild(tr);
+      });
+      t.appendChild(tbody);
+    }
+    var src = document.getElementById('property-src');
+    if (src) src.textContent = '来源：' + pf.source + '。房价为 70 城官方一二三线分组，' + (hp && hp.note ? hp.note : '不合成全国平均') + '。';
+  }
+
+  /* ---------------- 外溢风向标 ---------------- */
+  function renderSpillover() {
+    var box = document.getElementById('spillover-grid');
+    if (!box || !D.spillover) return;
+    box.innerHTML = '';
+    D.spillover.forEach(function (s) {
+      var c = el('div', 'spill-card');
+      c.appendChild(el('div', 'kpi-name', s.name));
+      var val = el('div', 'kpi-value');
+      val.appendChild(document.createTextNode(s.value));
+      if (s.unit) val.appendChild(el('span', 'u', s.unit));
+      c.appendChild(val);
+      if (s.id === 'usGrowthSaar') {
+        c.appendChild(el('div', 'kpi-foot', '口径：SAAR（季环比折年率）｜截至 ' + s.asOf));
+      } else {
+        c.appendChild(el('div', 'kpi-foot', '截至 ' + s.asOf));
+      }
+      var ch = el('p', 'spill-channel');
+      ch.appendChild(el('b', '', '传到中国'));
+      ch.appendChild(document.createTextNode(s.channel));
+      c.appendChild(ch);
+      c.appendChild(el('div', 'kpi-src', s.source));
+      box.appendChild(c);
+    });
+  }
+
+  /* ---------------- 长周期 / 决策锚 ---------------- */
+  function renderLongCycle() {
+    var box = document.getElementById('long-cycle-panel');
+    var lc = D.longCycle;
+    if (!box || !lc) return;
+    box.classList.remove('scaffold-panel');
+    box.innerHTML = '';
+    box.appendChild(el('h3', 'panel-h', lc.label || '长周期坐标'));
+    box.appendChild(el('p', '', lc.phase));
+    if (lc.drivers && lc.drivers.length) {
+      box.appendChild(el('p', '', '勾连点：' + lc.drivers.join(' / ')));
+    }
+    var call = el('p', 'callout');
+    call.appendChild(el('span', 'callout-tag', '框架假设'));
+    call.appendChild(document.createTextNode(lc.disclaimer || '长波划分有争议，非预测。'));
+    box.appendChild(call);
+  }
+
+  function renderDecision() {
+    var box = document.getElementById('decision-panel');
+    if (!box || !D.decisionAnchors) return;
+    box.classList.remove('scaffold-panel');
+    box.innerHTML = '';
+    box.appendChild(el('h3', 'panel-h', '三条可证伪条件（非荐股）'));
+    D.decisionAnchors.forEach(function (a) {
+      var card = el('div', 'anchor-card');
+      card.appendChild(el('span', 'risk-tag', a.title));
+      card.appendChild(el('p', '', a.ifThen));
+      if (a.watch && a.watch.length) {
+        card.appendChild(el('div', 'kpi-src', '观察：' + a.watch.join(' · ')));
+      }
+      box.appendChild(card);
+    });
+  }
+
   /* ---------------- 主题 ---------------- */
   function initTheme() {
     var btn = document.getElementById('theme-btn');
@@ -690,10 +819,15 @@
 
   function init() {
     initTheme();
+    applyMeta();
     renderGauges();
     renderKpis('all');
     renderPmiStats();
     renderDemandTable();
+    renderProperty();
+    renderSpillover();
+    renderLongCycle();
+    renderDecision();
     renderGlobalFacts();
     renderTimeline();
     renderRisks();
