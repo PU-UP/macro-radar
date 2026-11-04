@@ -579,3 +579,32 @@ html[data-theme="dark"] .theme-btn-dot { background: var(--us); box-shadow: 0 0 
 .section-legacy > .rail .rail-en {
   letter-spacing: 0.04em;
 }
+
+.spill-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  padding: 16px 18px 14px;
+  box-shadow: var(--shadow);
+  min-width: 0;
+}
+.spill-card .spill-channel {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  margin: 10px 0 0;
+}
+.spill-card .spill-channel b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--cn);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.anchor-card {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.anchor-card:last-child { border-bottom: 0; }
+.anchor-card p { font-size: 14px; line-height: 1.85; color: var(--ink-2); margin: 8px 0 0; }
