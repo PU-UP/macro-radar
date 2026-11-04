@@ -569,3 +569,13 @@ html[data-theme="dark"] .theme-btn-dot { background: var(--us); box-shadow: 0 0 
   body { background: #fff; }
   .panel, .kpi, .risk-card, .global-fact { box-shadow: none; break-inside: avoid; }
 }
+
+
+/* Schema scaffold slots (awaiting data.js fields) */
+.scaffold-panel {
+  border-style: dashed;
+  opacity: 0.96;
+}
+.section-legacy > .rail .rail-en {
+  letter-spacing: 0.04em;
+}
