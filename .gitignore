@@ -1,0 +1,31 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Env / secrets (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# Local caches / scratch
+node_modules/
+.cache/
+tmp/
+temp/
+*.log
+
+# Python / tooling
+__pycache__/
+.venv/
+venv/
+
+# Local-only working notes
+.working/

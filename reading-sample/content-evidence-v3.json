@@ -1,0 +1,499 @@
+{
+  "headline": "7—9月出厂价格涨幅的分层差异在扩大：采掘、原材料环比回升更明显，加工与生活资料环比变化较小。行业利润表现分化，但现有数据仍不足以判定谁成功转嫁了成本。",
+  "cutoff": "2026-10-27T07:26:57Z",
+  "charts": [
+    {
+      "chart_id": "R1",
+      "type": "line_small_multiples",
+      "title": "7—9月：分层出厂价格怎么变",
+      "series": [
+        {
+          "label": "采掘",
+          "metric": "同比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": 16.4,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 17.8,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 25.4,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "采掘",
+          "metric": "环比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": -0.2,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 2.7,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 7.7,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "原材料",
+          "metric": "同比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": 6.1,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 6.7,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 9.4,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "原材料",
+          "metric": "环比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": -2.4,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 0.8,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 2.6,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "加工",
+          "metric": "同比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": 3.1,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 3.1,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 3.4,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "加工",
+          "metric": "环比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": -0.1,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 0.0,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 0.2,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "生活资料",
+          "metric": "同比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": -0.8,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": -0.5,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": -0.1,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        },
+        {
+          "label": "生活资料",
+          "metric": "环比",
+          "unit": "%",
+          "definition": "工业生产者出厂价格分档；2025年基期；同比和环比必须分别绘图，不混为价格水平",
+          "points": [
+            {
+              "period": "2026-07",
+              "value": -0.1,
+              "source_id": "S6",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+              "release_date": "2026-08-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:08Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-08",
+              "value": 0.2,
+              "source_id": "S7",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+              "release_date": "2026-09-09 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:25:49Z",
+              "verification_status": "正文表格已核"
+            },
+            {
+              "period": "2026-09",
+              "value": 0.1,
+              "source_id": "S1",
+              "source_url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+              "release_date": "2026-10-14 09:30 +08:00",
+              "fetched_at": "2026-10-27T07:26:57Z",
+              "verification_status": "正文表格已核"
+            }
+          ]
+        }
+      ],
+      "display_rule": "同比与环比分面；百分比变化率不是价格水平。不得把分档落差标成利润或成本转嫁率。"
+    },
+    {
+      "chart_id": "R2",
+      "type": "table_or_separate_bars",
+      "title": "1—9月同行业：价格、实际增加值与利润分别变化多少",
+      "period": "2026-01至2026-09",
+      "rows": [
+        {
+          "industry": "煤炭开采和洗选业",
+          "ppi_period_average_yoy_pct": 10.6,
+          "real_value_added_yoy_pct": 0.2,
+          "total_profit_yoy_pct": 57.0
+        },
+        {
+          "industry": "有色金属冶炼和压延加工业",
+          "ppi_period_average_yoy_pct": 21.6,
+          "real_value_added_yoy_pct": -1.6,
+          "total_profit_yoy_pct": 79.7
+        },
+        {
+          "industry": "化学原料和化学制品制造业",
+          "ppi_period_average_yoy_pct": 5.9,
+          "real_value_added_yoy_pct": 3.6,
+          "total_profit_yoy_pct": 49.2
+        },
+        {
+          "industry": "计算机、通信和其他电子设备制造业",
+          "ppi_period_average_yoy_pct": 2.2,
+          "real_value_added_yoy_pct": 15.8,
+          "total_profit_yoy_pct": 103.8
+        },
+        {
+          "industry": "汽车制造业",
+          "ppi_period_average_yoy_pct": -2.2,
+          "real_value_added_yoy_pct": 7.3,
+          "total_profit_yoy_pct": -22.8
+        },
+        {
+          "industry": "黑色金属冶炼和压延加工业",
+          "ppi_period_average_yoy_pct": -0.5,
+          "real_value_added_yoy_pct": 1.7,
+          "total_profit_yoy_pct": -73.3
+        },
+        {
+          "industry": "非金属矿物制品业",
+          "ppi_period_average_yoy_pct": -4.4,
+          "real_value_added_yoy_pct": -2.9,
+          "total_profit_yoy_pct": -46.9
+        }
+      ],
+      "columns": [
+        {
+          "key": "ppi_period_average_yoy_pct",
+          "label": "出厂价格期间平均同比",
+          "unit": "%",
+          "source_id": "S1",
+          "definition": "1—9月平均价格同比，非销售加权营收价格、非利润率"
+        },
+        {
+          "key": "real_value_added_yoy_pct",
+          "label": "实际增加值同比",
+          "unit": "%",
+          "source_id": "S8",
+          "definition": "扣除价格因素的增加值增长，非销量、产量或营业收入增长"
+        },
+        {
+          "key": "total_profit_yoy_pct",
+          "label": "利润总额同比",
+          "unit": "%",
+          "source_id": "S3",
+          "definition": "1—9月累计利润总额可比增长，非营业收入利润率"
+        }
+      ],
+      "comparability_limit": "同一日历窗口、同名行业可作描述性并列，但调查对象、权重和经济量不完全一致，不能相乘得到营业收入，也不能推导利润率或成本转嫁因果。"
+    }
+  ],
+  "turnover": [
+    {
+      "chart_id": "R3",
+      "type": "metric_cards",
+      "source_id": "S3",
+      "metrics": [
+        {
+          "label": "营业收入同比",
+          "value": 6.6,
+          "unit": "%",
+          "period": "2026年1—9月累计"
+        },
+        {
+          "label": "利润总额同比",
+          "value": 15.5,
+          "unit": "%",
+          "period": "2026年1—9月累计"
+        },
+        {
+          "label": "应收账款余额同比",
+          "value": 10.0,
+          "unit": "%",
+          "period": "2026年9月末时点"
+        },
+        {
+          "label": "产成品存货余额同比",
+          "value": 11.6,
+          "unit": "%",
+          "period": "2026年9月末时点"
+        },
+        {
+          "label": "应收账款平均回收期",
+          "value": 71.6,
+          "yoy_change": 1.3,
+          "unit": "天",
+          "period": "2026年9月末官方指标"
+        },
+        {
+          "label": "产成品存货周转天数",
+          "value": 21.0,
+          "yoy_change": 0.6,
+          "unit": "天",
+          "period": "2026年9月末官方指标"
+        }
+      ],
+      "display_rule": "累计流量、期末余额及天数分别标明；不把应收/存货说成比利润增长更快，不直接相减推导现金流。"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "S1",
+      "publisher": "国家统计局",
+      "title": "2026年9月份工业生产者出厂价格同比上涨5.0% 环比上涨1.2%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261014_1965476.html",
+      "release_date": "2026-10-14 09:30 +08:00",
+      "release_date_status": "正文已核",
+      "fetched_at": "2026-10-27T07:26:57Z",
+      "verification_status": "原始抓取正文与下列使用的数据已逐项核对",
+      "definition_notes": [
+        "统计范围：出厂价格涵盖41个工业行业大类、1300多个基本分类；购进价格涵盖9大类、800多个基本分类；重点调查+典型调查，涉及全国4万多家工业企业",
+        "行业划分依据 GB/T 4754-2017",
+        "基期轮换：2026年1月起以2025年为基期编制发布PPI；经测算对各月同比影响平均约0.08个百分点",
+        "口径并列：同一发布内「环比涨跌幅/同比涨跌幅/1—9月同比涨跌幅」三列并列，不可互替"
+      ]
+    },
+    {
+      "source_id": "S6",
+      "publisher": "国家统计局",
+      "title": "2026年7月份工业生产者出厂价格同比上涨3.5%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202608/t20260809_1965007.html",
+      "release_date": "2026-08-09 09:30 +08:00",
+      "release_date_status": "正文已核",
+      "fetched_at": "2026-10-27T07:26:08Z",
+      "verification_status": "原始抓取正文与下列使用的数据已逐项核对",
+      "definition_notes": [
+        "与S1、S7为同一调查制度、同一发布体例（同一系列的前月读数），可直接连成序列",
+        "同样适用2025年基期轮换说明"
+      ]
+    },
+    {
+      "source_id": "S7",
+      "publisher": "国家统计局",
+      "title": "2026年8月份工业生产者出厂价格同比上涨3.8% 环比上涨0.4%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202609/t20260909_1965262.html",
+      "release_date": "2026-09-09 09:30 +08:00",
+      "release_date_status": "正文已核",
+      "fetched_at": "2026-10-27T07:25:49Z",
+      "verification_status": "原始抓取正文与下列使用的数据已逐项核对",
+      "definition_notes": [
+        "同系列前月读数；1—8月累计列用于与S6、S1的累计列口径一致"
+      ]
+    },
+    {
+      "source_id": "S8",
+      "publisher": "国家统计局",
+      "title": "2026年9月份规模以上工业增加值增长5.5%",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202610/t20261019_1965617.html",
+      "release_date": "2026-10-19（由官方URL识别日期，正文未显示发布时间）",
+      "release_date_status": "具体发布时间待核，不沿用原稿10:00",
+      "fetched_at": "2026-10-27T07:26:05Z",
+      "verification_status": "原始抓取正文与下列使用的数据已逐项核对",
+      "definition_notes": [
+        "增加值增速为扣除价格因素的实际增长率，可作行业物量的官方代理，但不是销量统计",
+        "规模以上口径为年主营业务收入2000万元及以上工业企业；同期数按可比口径调整，与上年公布值存在口径差异",
+        "行业分类执行 GB/T 4754-2017，与PPI主要行业表、利润表可对齐"
+      ]
+    },
+    {
+      "source_id": "S3",
+      "publisher": "国家统计局",
+      "title": "2026年1—9月份全国规模以上工业企业利润增长15.5%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261027_1965697.html",
+      "release_date": "2026-10-27（由官方 URL 识别日期，保存正文未显示发布时间）",
+      "release_date_status": "本次纠正审核文件误填的10月19日；具体发布时间未在保存正文复核",
+      "fetched_at": "2026-10-27T05:31:20Z",
+      "verification_status": "原始抓取正文与下列使用的数据已逐项核对",
+      "definition_notes": [
+        "利润同比按可比口径计算（附注二）；1—9月为累计口径",
+        "营业收入利润率 = 利润总额÷营业收入×100%",
+        "产成品存货周转天数 = 360×平均产成品存货÷营业成本×累计月数÷12；应收账款平均回收期同理",
+        "本发布只给总体与分登记注册类型的利润率，未给分行业营业收入与分行业现金流"
+      ]
+    }
+  ],
+  "verification": "24 price points and 21 industry values rechecked against supplied cached official text; no fresh browse.",
+  "metadata_correction": "S3 release date corrected from copied 2026-10-19 to URL date 2026-10-27; exact time not reverified.",
+  "input_sha256": {
+    "macro-observation-reviewed.json": "fcbb407807ce1ac681c7095a5085dc31973da41a9b4acfde6cb324c9f3d5d223",
+    "macro-deepening-review-audit.json": "516dbca78bdc528f84704a0294b9dad3ea8f3e9ecba9b42d785700a408f92fc0",
+    "macro-deepening-source-evidence.json": "98bcd294ecc8ba0bf59dc541cd279f27bbe2c05b69197088fd6e20895c812582"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "headline": "9月出厂价格分层明显；尚不足以证明成本转嫁。",
+  "price_period": "2026-09",
+  "prices": [
+    {
+      "label": "采掘",
+      "yoy": 25.4,
+      "mom": 7.7,
+      "source": "S1"
+    },
+    {
+      "label": "原材料",
+      "yoy": 9.4,
+      "mom": 2.6,
+      "source": "S1"
+    },
+    {
+      "label": "加工",
+      "yoy": 3.4,
+      "mom": 0.2,
+      "source": "S1"
+    },
+    {
+      "label": "生活资料（整体）",
+      "yoy": -0.1,
+      "mom": 0.1,
+      "source": "S1"
+    }
+  ],
+  "profit_period": "2026-01/2026-09",
+  "profits": [
+    {
+      "label": "煤炭开采和洗选业",
+      "yoy": 57.0,
+      "source": "S3"
+    },
+    {
+      "label": "汽车制造业",
+      "yoy": -22.8,
+      "source": "S3"
+    }
+  ],
+  "sources": {
+    "S1": {
+      "source_id": "S1",
+      "name": "国家统计局 · 2026 年 9 月份工业生产者出厂价格",
+      "url": "https://www.stats.gov.cn/sj/zxfbhjd/202610/t20261014_1965476.html",
+      "statistical_period": "2026 年 9 月",
+      "release_date": "2026-10-14 09:30",
+      "unit": "%",
+      "caliber": "PPI 出厂价格与购进价格指数：生产资料三档、生活资料整体与四分项、购进端九大类、30 个主要行业出厂价格；2025 年为新基期",
+      "observed_cutoff": "2026-10-27 13:30:08 (Asia/Shanghai)",
+      "verification_status": "已核",
+      "verification_note": "olive 于 2026-10-27 13:30:08 抓取该页（HTTP 200，回执 fetchedAt 2026-10-27T05:30:08Z），读到正文与主要数据表；本稿引用的每一个 PPI 数值均取自该页。未下载 xlsx 附件。",
+      "reader": "olive"
+    },
+    "S3": {
+      "source_id": "S3",
+      "name": "国家统计局 · 2026 年 1—9 月份全国规模以上工业企业利润增长 15.5%",
+      "url": "https://www.stats.gov.cn/sj/zxfb/202610/t20261027_1965697.html",
+      "statistical_period": "2026 年 1—9 月累计（9 月末时点数据）",
+      "release_date": "2026-10-27 09:30",
+      "unit": "亿元 / % / 元 / 天",
+      "caliber": "规模以上工业企业利润总额（按可比口径计算）、营业收入与成本、营收利润率、分行业主要财务指标、经济效益指标；利润增速为累计同比",
+      "observed_cutoff": "2026-10-27 13:31:20 (Asia/Shanghai)",
+      "verification_status": "已核（正文与表 1/表 2/表 3 起始部分）",
+      "verification_note": "olive 于 2026-10-27 13:31:20 抓取该页（HTTP 200，回执 fetchedAt 2026-10-27T05:31:20Z），读到正文全部段落与表 1、表 2、表 3 起始行；表 3 完整分行业 xlsx 未逐行下载核对，行业利润数值取自正文清单。",
+      "reader": "olive"
+    }
+  },
+  "verification": "Checked selected values against supplied official cached text; no fresh fetch or full audit.",
+  "input_sha256": {
+    "olive-macro-draft.json": "d934f21bf776fc89fd6fc996ce51f1ca9efd98b09b09f3101b7e35dcb523ab64",
+    "olive-macro-review.json": "9101945876a52cf6a602ccf4070d5bd002b55a7365eed7fe096c2aea1b404ccd",
+    "olive-macro-source-evidence.json": "d286eb14ec1174d524c828f6be0594681e35e3d9aad2034babb79b35794a49bd"
+  }
+}
