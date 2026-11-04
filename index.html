@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>宏观观察 Macro Observer · 宏观经济观察</title>
-<meta name="description" content="宏观经济观察台：中国与美国的增长、价格、信用、货币政策与全球资产价格仪表盘。数据截至 2026 年 10 月 29 日收盘。">
+<meta name="description" content="宏观经济观察台：中国主线（增长、价格、信用、地产固投），美国与全球作外溢风向标；含长周期坐标与决策锚。数据截至 2026 年 10 月 29 日收盘。">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="assets/styles.css?v=45">
+<link rel="stylesheet" href="assets/styles.css?v=46">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E2135'/><path d='M6 22 L12 13 L18 18 L26 8' stroke='%23E4674E' stroke-width='2.5' fill='none'/></svg>">
 </head>
 <body>
@@ -30,8 +30,10 @@
       <a href="#cycle">景气</a>
       <a href="#demand">需求</a>
       <a href="#credit">信用</a>
-      <a href="#us">美国</a>
-      <a href="#global">全球</a>
+      <a href="#property">地产固投</a>
+      <a href="#spillover">外溢</a>
+      <a href="#long-cycle">长周期</a>
+      <a href="#decision">决策锚</a>
       <a href="#calendar">日历</a>
       <a href="#risks">展望</a>
     </nav>
@@ -348,13 +350,49 @@
     </div>
   </section>
 
-  <!-- ============ 美国 ============ -->
-  <section class="section" id="us">
-    <div class="rail" aria-hidden="true"><span class="rail-label">美　国</span><span class="rail-en">UNITED STATES</span></div>
+
+  <!-- ============ 地产与固投（schema 预留） ============ -->
+  <section class="section" id="property">
+    <div class="rail" aria-hidden="true"><span class="rail-label">地　产</span><span class="rail-en">PROPERTY / FAI</span></div>
     <div class="section-body">
       <header class="section-head">
         <span class="section-idx">伍</span>
-        <h2>美国：加息周期重启，路径摇摆</h2>
+        <h2>地产与固投</h2>
+        <p class="section-sub">字段契约：china.propertyFixed｜待 macro 填数并核验后接入图表</p>
+      </header>
+      <div class="panel panel-prose scaffold-panel">
+        <h3 class="panel-h">占位 · 下期接入</h3>
+        <p>预留指标：房地产开发投资同比、销售面积/新开工、70 城或官方房价摘要、固定资产投资与民间投资。正刊不写无核验数字。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §1.5；数值进入 <code>assets/data.js</code> 前须同步 <code>DATA-VERIFICATION.md</code>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 外溢（schema 预留；旧美国/全球栏将迁入） ============ -->
+  <section class="section" id="spillover">
+    <div class="rail" aria-hidden="true"><span class="rail-label">外　溢</span><span class="rail-en">SPILLOVER</span></div>
+    <div class="section-body">
+      <header class="section-head">
+        <span class="section-idx">陆</span>
+        <h2>外溢风向标</h2>
+        <p class="section-sub">美利率 · 美元 · 油价 → 对中国的传导｜替代对等「美国专题」导航</p>
+      </header>
+      <div class="panel panel-prose scaffold-panel">
+        <h3 class="panel-h">占位 · 下期改写</h3>
+        <p>每条外溢指标将带 <code>channel</code>（传到中国的机制一句话）。美国 GDP 展示处须标明 SAAR。日频股指与加息概率降权为脚注。</p>
+        <p>迁移完成前，下方仍保留原「美国」「全球」内容供对照，不再出现在主导航。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §2 <code>spillover</code>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 美国 ============ -->
+  <section class="section section-legacy" id="us" data-legacy="migrate-to-spillover">
+    <div class="rail" aria-hidden="true"><span class="rail-label">美　国</span><span class="rail-en">LEGACY · US</span></div>
+    <div class="section-body">
+      <header class="section-head">
+        <span class="section-idx">迁</span>
+        <h2>美国（过渡保留 · 将迁入外溢）</h2>
         <p class="section-sub">2026 年 1—9 月｜美国劳工统计局、美联储</p>
       </header>
 
@@ -412,12 +450,12 @@
   </section>
 
   <!-- ============ 全球 ============ -->
-  <section class="section" id="global">
-    <div class="rail" aria-hidden="true"><span class="rail-label">全　球</span><span class="rail-en">GLOBAL</span></div>
+  <section class="section section-legacy" id="global" data-legacy="migrate-to-spillover">
+    <div class="rail" aria-hidden="true"><span class="rail-label">全　球</span><span class="rail-en">LEGACY · GLOBAL</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">陆</span>
-        <h2>全球：油价的二次冲击与风险资产的重新定价</h2>
+        <span class="section-idx">迁</span>
+        <h2>全球（过渡保留 · 将迁入外溢）</h2>
         <p class="section-sub">2026 年｜布伦特月均价统一采用 EIA 布伦特现货月均价，单一口径、无推算值</p>
       </header>
 
@@ -475,12 +513,47 @@
     </div>
   </section>
 
+
+  <!-- ============ 长周期坐标 ============ -->
+  <section class="section" id="long-cycle">
+    <div class="rail" aria-hidden="true"><span class="rail-label">长周期</span><span class="rail-en">LONG CYCLE</span></div>
+    <div class="section-body">
+      <header class="section-head">
+        <span class="section-idx">柒</span>
+        <h2>长周期坐标</h2>
+        <p class="section-sub">康波工作假设 · 短注｜展开与争议归教授课</p>
+      </header>
+      <div class="panel panel-prose scaffold-panel" id="long-cycle-panel">
+        <h3 class="panel-h">占位 · 待 longCycle 字段</h3>
+        <p>将展示：当前相位（标明框架假设）、与信用/产能/能源的勾连、证据字段引用，以及争议免责声明。不在正刊展开长波辩论。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §3；学习展开见 @professor。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 决策锚 ============ -->
+  <section class="section" id="decision">
+    <div class="rail" aria-hidden="true"><span class="rail-label">决策锚</span><span class="rail-en">ANCHORS</span></div>
+    <div class="section-body">
+      <header class="section-head">
+        <span class="section-idx">捌</span>
+        <h2>决策锚</h2>
+        <p class="section-sub">股市 / 买房 / 行业与创业 · 可证伪条件句，非荐股</p>
+      </header>
+      <div class="panel panel-prose scaffold-panel" id="decision-panel">
+        <h3 class="panel-h">占位 · 待 decisionAnchors 字段</h3>
+        <p>三条条件卡将由 <code>decisionAnchors</code> 驱动。本期只预留版位，不写目标价或个股建议。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ 日历 ============ -->
   <section class="section" id="calendar">
     <div class="rail" aria-hidden="true"><span class="rail-label">日　历</span><span class="rail-en">CALENDAR</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">柒</span>
+        <span class="section-idx">玖</span>
         <h2>政策与事件日历</h2>
         <p class="section-sub">2026 年 2 月 — 12 月，已发生与已预告</p>
       </header>
@@ -493,7 +566,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">展　望</span><span class="rail-en">OUTLOOK</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">捌</span>
+        <span class="section-idx">拾</span>
         <h2>接下来看什么</h2>
         <p class="section-sub">六个可验证的观察点</p>
       </header>
@@ -506,7 +579,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">方　法</span><span class="rail-en">METHOD</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">玖</span>
+        <span class="section-idx">拾壹</span>
         <h2>数据口径与来源</h2>
         <p class="section-sub">本页所有数值均标注发布方与发布日期</p>
       </header>
@@ -547,7 +620,7 @@
   <div class="foot-inner">
     <div>
       <b>宏观观察 Macro Observer</b>
-      <p>把增长、价格、信用与政策放进同一张表里看。</p>
+      <p>中国主线观察台：理解 · 学习 · 长周期坐标 · 决策锚。</p>
     </div>
     <div class="foot-meta">
       <span>页面生成：2026-10-30</span>
@@ -557,7 +630,7 @@
   </div>
 </footer>
 
-<script src="assets/data.js?v=45"></script>
-<script src="assets/app.js?v=45"></script>
+<script src="assets/data.js?v=46"></script>
+<script src="assets/app.js?v=46"></script>
 </body>
 </html>
