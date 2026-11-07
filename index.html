@@ -6,7 +6,7 @@
 <title>宏观观察 Macro Observer · 宏观经济观察</title>
 <meta name="description" content="宏观经济观察台：中国主线（增长、价格、信用、地产固投），美国与全球作外溢风向标；含长周期坐标与决策锚。数据截至 2026 年 11 月 3 日。">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="assets/styles.css?v=47">
+<link rel="stylesheet" href="assets/styles.css?v=48">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E2135'/><path d='M6 22 L12 13 L18 18 L26 8' stroke='%23E4674E' stroke-width='2.5' fill='none'/></svg>">
 </head>
 <body>
@@ -30,6 +30,7 @@
       <a href="#cycle">景气</a>
       <a href="#demand">需求</a>
       <a href="#credit">信用</a>
+      <a href="#fiscal">财政</a>
       <a href="#property">地产固投</a>
       <a href="#spillover">外溢</a>
       <a href="#long-cycle">长周期</a>
@@ -343,17 +344,61 @@
           王青、温彬等判断短期内动用降准降息等总量工具的可能性下降；浙商证券、银河证券则认为降准仍可期。
           分歧的核心在于：观察「结构性工具 + 财政协同」的宽信用效果，还是等待总量宽松的确认信号。
         </p>
+
+      <div class="grid-2 schema-slots" data-schema="china.credit.v1.1">
+        <figure class="panel scaffold-panel" id="slot-policy-rate">
+          <figcaption>
+            <h3>政策利率锚（OMO 7 天逆回购）</h3>
+            <span class="fig-note">主表述为公开市场 7 天逆回购操作利率；DR007 仅可选并列</span>
+          </figcaption>
+          <p class="scaffold-body" id="policy-rate-note">版位已预留（<code>policyRateNote</code>）。下期有核验文案后由数据层注入，不在此编造利率。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-real-rate">
+          <figcaption>
+            <h3>近似实际利率</h3>
+            <span class="fig-note">优先 cn10y − 核心 CPI；可选 LPR1Y − 核心 CPI · 须标「近似」</span>
+          </figcaption>
+          <p class="scaffold-body" id="real-rate-proxy">版位已预留（<code>realRateProxy</code>）。非正式官方实际利率；有核验值前不展示数字。</p>
+        </figure>
       </div>
     </div>
   </section>
 
+  <!-- ============ 财政（schema v1.1 轻量） ============ -->
+  <section class="section" id="fiscal">
+    <div class="rail" aria-hidden="true"><span class="rail-label">财　政</span><span class="rail-en">FISCAL</span></div>
+    <div class="section-body">
+      <header class="section-head">
+        <span class="section-idx">伍</span>
+        <h2>财政：专项债进度与一般预算</h2>
+        <p class="section-sub">轻量一期｜财政部原文可核验才录 · 禁止自造「财政脉冲」</p>
+      </header>
+      <div class="grid-2 schema-slots" data-schema="china.fiscal.v1.1">
+        <figure class="panel scaffold-panel" id="slot-special-bond">
+          <figcaption>
+            <h3>专项债发行进度</h3>
+            <span class="fig-note"><code>specialBondProgress</code> · 额度 / 已发行 / 进度对齐才展示</span>
+          </figcaption>
+          <p class="scaffold-body" id="special-bond-progress">版位已预留。下期有财政部可核验序列后再填。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-general-budget">
+          <figcaption>
+            <h3>一般公共预算同比</h3>
+            <span class="fig-note"><code>generalBudgetYoY</code> · 收入或累计支出同比（须标明）</span>
+          </figcaption>
+          <p class="scaffold-body" id="general-budget-yoy">版位已预留。单月噪声大时可用累计支出同比。</p>
+        </figure>
+      </div>
+      <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §1.6。无单一官方序列时，财政立场写入决策锚条件句，不进 KPI。</p>
+    </div>
+  </section>
 
   <!-- ============ 地产与固投 ============ -->
   <section class="section" id="property">
     <div class="rail" aria-hidden="true"><span class="rail-label">地　产</span><span class="rail-en">PROPERTY / FAI</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">伍</span>
+        <span class="section-idx">陆</span>
         <h2>地产与固投：投资仍深收缩，房价按线城分化</h2>
         <p class="section-sub">2026 年 1—9 月同比｜国家统计局；房价为 9 月 70 城一二三线摘要，不合成全国平均</p>
       </header>
@@ -370,6 +415,22 @@
         </div>
         <p class="fig-src" id="property-src">来源：国家统计局</p>
       </figure>
+      <div class="grid-2 schema-slots" data-schema="china.propertyFixed.v1.1">
+        <figure class="panel scaffold-panel" id="slot-hh-loan">
+          <figcaption>
+            <h3>住户中长期贷款</h3>
+            <span class="fig-note"><code>hhMediumLongLoan</code> · 须标明增量或余额同比</span>
+          </figcaption>
+          <p class="scaffold-body" id="hh-medium-long-loan">版位已预留。人民银行金融统计有核验序列后再填。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-inventory">
+          <figcaption>
+            <h3>官方待售 / 去化</h3>
+            <span class="fig-note"><code>inventoryOrDestock</code> · 仅官方待售面积等口径</span>
+          </figcaption>
+          <p class="scaffold-body" id="inventory-or-destock">版位已预留。禁止中介库存、草根去化作正刊主字段。</p>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -378,12 +439,29 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">外　溢</span><span class="rail-en">SPILLOVER</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">陆</span>
+        <span class="section-idx">柒</span>
         <h2>外溢风向标：利率、美元与油价如何传到中国</h2>
         <p class="section-sub">每条含传导渠道；美国 GDP 为 SAAR，不可与中国同比混比｜替代对等「美国专题」导航</p>
       </header>
       <div class="grid-3" id="spillover-grid"></div>
+      <div class="grid-2 schema-slots" data-schema="spillover.v1.1">
+        <figure class="panel scaffold-panel" id="slot-cfets-reer">
+          <figcaption>
+            <h3>CFETS 人民币汇率指数</h3>
+            <span class="fig-note"><code>cfetsReer</code> · 月度；有值时优先于日度中间价叙事</span>
+          </figcaption>
+          <p class="scaffold-body" id="cfets-reer">版位已预留。月度官方值核验后再填。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-usdcny-note">
+          <figcaption>
+            <h3>美元兑人民币中间价口径</h3>
+            <span class="fig-note"><code>usdcny</code> · CFETS 中间价，非即期收盘、非离岸 CNH</span>
+          </figcaption>
+          <p class="scaffold-body">现有中间价卡须持续标明序列口径；日度中间价不作主叙事。</p>
+        </figure>
+      </div>
       <p class="callout"><span class="callout-tag">口径</span>下方仍保留原美国 / 全球图表作过渡，不再出现在主导航。日频股指与加息概率降权为脚注。</p>
+      <p class="callout"><span class="callout-tag">工作假设</span>油价 → 国内 PPI 约 1–2 个季度滞后（<code>ppiLagNote</code>），非计量结论，不可由单月涨跌线性外推。</p>
     </div>
   </section>
 
@@ -520,7 +598,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">长周期</span><span class="rail-en">LONG CYCLE</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">柒</span>
+        <span class="section-idx">捌</span>
         <h2>长周期坐标</h2>
         <p class="section-sub">康波工作假设 · 短注｜展开与争议归教授课</p>
       </header>
@@ -537,14 +615,37 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">决策锚</span><span class="rail-en">ANCHORS</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">捌</span>
+        <span class="section-idx">玖</span>
         <h2>决策锚</h2>
-        <p class="section-sub">股市 / 买房 / 行业与创业 · 可证伪条件句，非荐股</p>
+        <p class="section-sub">股市 / 买房 / 行业与创业 · 年频风险预算与 ETF 低频再平衡条件句，非择时、非目标价</p>
       </header>
       <div class="panel panel-prose scaffold-panel" id="decision-panel">
         <h3 class="panel-h">占位 · 待 decisionAnchors 字段</h3>
         <p>三条条件卡将由 <code>decisionAnchors</code> 驱动。本期只预留版位，不写目标价或个股建议。</p>
         <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。</p>
+      </div>
+      <div class="grid-3 schema-slots" data-schema="china.equityAnchor.v1.1">
+        <figure class="panel scaffold-panel" id="slot-earnings">
+          <figcaption>
+            <h3>盈利增速</h3>
+            <span class="fig-note"><code>earningsGrowth</code> · 须指名指数</span>
+          </figcaption>
+          <p class="scaffold-body" id="equity-earnings">版位已预留。落点 <code>china.equityAnchor</code>；决策锚只引用字段 id。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-roe">
+          <figcaption>
+            <h3>ROE</h3>
+            <span class="fig-note"><code>roe</code> · 须指名指数</span>
+          </figcaption>
+          <p class="scaffold-body" id="equity-roe">版位已预留。有稳定官方 / 准官方源再填。</p>
+        </figure>
+        <figure class="panel scaffold-panel" id="slot-pe">
+          <figcaption>
+            <h3>估值分位</h3>
+            <span class="fig-note"><code>pePercentile</code> · 固定指数 + 回看窗口</span>
+          </figcaption>
+          <p class="scaffold-body" id="equity-pe">版位已预留。无免费稳定源时标「暂定 / 未独立复核」，不得假装已核。</p>
+        </figure>
       </div>
     </div>
   </section>
@@ -554,7 +655,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">日　历</span><span class="rail-en">CALENDAR</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">玖</span>
+        <span class="section-idx">拾</span>
         <h2>政策与事件日历</h2>
         <p class="section-sub">2026 年 2 月 — 12 月，已发生与已预告</p>
       </header>
@@ -567,7 +668,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">展　望</span><span class="rail-en">OUTLOOK</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">拾</span>
+        <span class="section-idx">拾壹</span>
         <h2>接下来看什么</h2>
         <p class="section-sub">六个可验证的观察点</p>
       </header>
@@ -580,7 +681,7 @@
     <div class="rail" aria-hidden="true"><span class="rail-label">方　法</span><span class="rail-en">METHOD</span></div>
     <div class="section-body">
       <header class="section-head">
-        <span class="section-idx">拾壹</span>
+        <span class="section-idx">拾贰</span>
         <h2>数据口径与来源</h2>
         <p class="section-sub">本页所有数值均标注发布方与发布日期</p>
       </header>
@@ -632,7 +733,7 @@
   </div>
 </footer>
 
-<script src="assets/data.js?v=47"></script>
-<script src="assets/app.js?v=47"></script>
+<script src="assets/data.js?v=48"></script>
+<script src="assets/app.js?v=48"></script>
 </body>
 </html>
