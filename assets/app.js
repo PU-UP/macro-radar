@@ -746,6 +746,99 @@
     });
   }
 
+  /* ---------------- schema v1.1 slots (fill only when verified) ---------------- */
+  function fillSlot(panelId, bodyId, html, filled) {
+    var panel = document.getElementById(panelId);
+    var body = document.getElementById(bodyId);
+    if (!body) return;
+    if (!filled) return;
+    body.innerHTML = html;
+    if (panel) panel.classList.add('is-filled');
+    if (panel) panel.classList.remove('scaffold-panel');
+  }
+
+  function hydrateSchemaSlots() {
+    var china = D.china || {};
+    var credit = china.credit || {};
+    if (credit.policyRateNote) {
+      fillSlot('slot-policy-rate', 'policy-rate-note', String(credit.policyRateNote), true);
+    }
+    if (credit.realRateProxy) {
+      var rr = credit.realRateProxy;
+      var txt = typeof rr === 'string' ? rr : (rr.display || rr.label || '');
+      if (rr.value != null && rr.unit) txt = rr.value + rr.unit + (rr.note ? ' · ' + rr.note : '');
+      if (txt) {
+        fillSlot('slot-real-rate', 'real-rate-proxy',
+          '<b>近似实际利率</b>（非正式官方口径）' + txt +
+          (rr.formula ? '<br>公式：' + rr.formula : '') +
+          (rr.source ? '<br>来源：' + rr.source : ''), true);
+      }
+    }
+
+    var fiscal = china.fiscal || {};
+    if (fiscal.specialBondProgress) {
+      var sb = fiscal.specialBondProgress;
+      fillSlot('slot-special-bond', 'special-bond-progress',
+        (sb.display || sb.summary || JSON.stringify(sb)) +
+        (sb.source ? '<br>来源：' + sb.source : ''), true);
+    }
+    if (fiscal.generalBudgetYoY) {
+      var gb = fiscal.generalBudgetYoY;
+      fillSlot('slot-general-budget', 'general-budget-yoy',
+        (gb.display || (gb.value != null ? signedPct(gb.value) + '%' : '')) +
+        (gb.note ? ' · ' + gb.note : '') +
+        (gb.source ? '<br>来源：' + gb.source : ''), true);
+    }
+
+    var pf = china.propertyFixed || {};
+    if (pf.hhMediumLongLoan) {
+      var hh = pf.hhMediumLongLoan;
+      fillSlot('slot-hh-loan', 'hh-medium-long-loan',
+        (hh.display || (hh.value != null ? signedPct(hh.value) + '%' : '')) +
+        (hh.basis ? ' · 口径：' + hh.basis : '') +
+        (hh.source ? '<br>来源：' + hh.source : ''), true);
+    }
+    if (pf.inventoryOrDestock) {
+      var inv = pf.inventoryOrDestock;
+      fillSlot('slot-inventory', 'inventory-or-destock',
+        (inv.display || inv.summary || '') +
+        (inv.source ? '<br>来源：' + inv.source : ''), true);
+    }
+
+    var eq = china.equityAnchor || {};
+    if (eq.earningsGrowth) {
+      fillSlot('slot-earnings', 'equity-earnings',
+        (eq.earningsGrowth.display || eq.earningsGrowth.index || '') +
+        (eq.earningsGrowth.source ? '<br>来源：' + eq.earningsGrowth.source : ''), true);
+    }
+    if (eq.roe) {
+      fillSlot('slot-roe', 'equity-roe',
+        (eq.roe.display || '') +
+        (eq.roe.source ? '<br>来源：' + eq.roe.source : ''), true);
+    }
+    if (eq.pePercentile) {
+      var pe = eq.pePercentile;
+      var peTxt = pe.display || '';
+      if (pe.provisional) peTxt += ' · 暂定 / 未独立复核';
+      fillSlot('slot-pe', 'equity-pe', peTxt + (pe.source ? '<br>来源：' + pe.source : ''), true);
+    }
+
+    // spillover: cfetsReer if present as object or array item
+    var cfets = null;
+    if (D.spillover && D.spillover.cfetsReer) cfets = D.spillover.cfetsReer;
+    if (!cfets && Array.isArray(D.spillover)) {
+      for (var i = 0; i < D.spillover.length; i++) {
+        if (D.spillover[i].id === 'cfetsReer') { cfets = D.spillover[i]; break; }
+      }
+    }
+    if (cfets) {
+      fillSlot('slot-cfets-reer', 'cfets-reer',
+        (cfets.name ? cfets.name + ' ' : '') + (cfets.value || '') + (cfets.unit || '') +
+        (cfets.channel ? '<br>传到中国：' + cfets.channel : '') +
+        (cfets.source ? '<br>来源：' + cfets.source : ''), true);
+    }
+  }
+
   /* ---------------- 主题 ---------------- */
   function initTheme() {
     var btn = document.getElementById('theme-btn');
@@ -828,6 +921,7 @@
     renderSpillover();
     renderLongCycle();
     renderDecision();
+    hydrateSchemaSlots();
     renderGlobalFacts();
     renderTimeline();
     renderRisks();

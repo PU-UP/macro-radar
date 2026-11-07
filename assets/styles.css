@@ -608,3 +608,19 @@ html[data-theme="dark"] .theme-btn-dot { background: var(--us); box-shadow: 0 0 
 }
 .anchor-card:last-child { border-bottom: 0; }
 .anchor-card p { font-size: 14px; line-height: 1.85; color: var(--ink-2); margin: 8px 0 0; }
+
+
+/* Schema v1.1 reserved slots (awaiting verified data.js) */
+.schema-slots {
+  margin-top: 1.25rem;
+}
+.scaffold-body {
+  margin: 0.75rem 1rem 1rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0.88;
+}
+.scaffold-panel.is-filled {
+  border-style: solid;
+  opacity: 1;
+}
