@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>宏观观察 Macro Observer · 宏观经济观察</title>
-<meta name="description" content="宏观经济观察台：中国主线（增长、价格、信用、地产固投），美国与全球作外溢风向标；含长周期坐标与决策锚。数据截至 2026 年 11 月 3 日。">
+<meta name="description" content="宏观经济观察台：中国主线（增长、价格、信用、地产固投），美国与全球作外溢风向标；含长周期坐标与决策锚。数据截至 2026 年 11 月 6 日。">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="assets/styles.css?v=48">
+<link rel="stylesheet" href="assets/styles.css?v=49">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E2135'/><path d='M6 22 L12 13 L18 18 L26 8' stroke='%23E4674E' stroke-width='2.5' fill='none'/></svg>">
 </head>
 <body>
@@ -39,7 +39,7 @@
       <a href="#risks">展望</a>
     </nav>
     <div class="masthead-meta">
-      <span class="stamp" id="stamp">数据截至 2026-11-03</span>
+      <span class="stamp" id="stamp">数据截至 2026-11-06</span>
       <button class="theme-btn" id="theme-btn" type="button" aria-pressed="false">
         <span class="theme-btn-dot" aria-hidden="true"></span><span id="theme-label">终端</span>
       </button>
@@ -51,7 +51,7 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>本期判断 · 第 46 期</p>
+    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>本期判断 · 第 47 期</p>
     <h1 class="hero-title">增长仍在修复，<br>景气再度收缩，<br>外溢价格回落。</h1>
     <p class="hero-lede">
       中国前三季度 GDP 增长 <b>4.6%</b>，三季度回升至 <b>4.5%</b>；10 月制造业 PMI 回落至 <b>49.3%</b>，
@@ -334,22 +334,25 @@
            9 月企业新发放贷款加权平均利率略低于 3%，同比低约 0.2 个百分点；个人住房新发放贷款加权平均利率约 3.1%。
            商业银行净息差约 1.41%，处于历史低位附近，报价行缺乏主动下调 LPR 加点的动力。</p>
         <p><b>操作端：</b>10 月 26 日央行开展 7000 亿元一年期 MLF，操作利率 2.00%，同日推出债市非银大额赎回互换便利（BNSF）；
-           10 月 28 日开展 1510 亿元 7 天期逆回购（利率 1.40%）并同时投放 10000 亿元隔夜逆回购，10 月 29 日再开展 1150 亿元 7 天期逆回购。
+           10 月 28 日曾开展 1510 亿元 7 天期逆回购（当时利率 1.40%）并同时投放 10000 亿元隔夜逆回购。
+           自 <b>2026 年 11 月 2 日</b>起，公开市场主要操作品种切换为<strong>隔夜逆回购</strong>，操作利率 <b>1.25%</b>（固定利率、数量招标）；
+           7 天期逆回购改为固定数量、利率招标，不再作为固定利率主政策锚。
            2026 年 8000 亿元新型政策性金融工具已投放完毕，国开行 10 月 27 日完成其中 3650 亿元、
            全部用于补充项目资本金；科技型中小企业三季度末贷款余额同比增长超 20%，获贷率 51.1%。
-           短端资金面宽松（DR007 1.3418%、DR001 1.2778%），但 10 年期国债收益率仍降至 1.6233%——
+           10 年期国债收益率 11 月 6 日中债报 <b>1.5868%</b>——
            债市在定价低通胀预期，而不是在定价宽信用。</p>
         <p class="callout">
           <span class="callout-tag">关键分歧</span>
           王青、温彬等判断短期内动用降准降息等总量工具的可能性下降；浙商证券、银河证券则认为降准仍可期。
           分歧的核心在于：观察「结构性工具 + 财政协同」的宽信用效果，还是等待总量宽松的确认信号。
         </p>
+      </div>
 
       <div class="grid-2 schema-slots" data-schema="china.credit.v1.1">
         <figure class="panel scaffold-panel" id="slot-policy-rate">
           <figcaption>
-            <h3>政策利率锚（OMO 7 天逆回购）</h3>
-            <span class="fig-note">主表述为公开市场 7 天逆回购操作利率；DR007 仅可选并列</span>
+            <h3>政策利率锚（隔夜 OMO）</h3>
+            <span class="fig-note">自 2026-11-02 起主表述为隔夜逆回购操作利率；7 天 OMO 不再是固定利率主锚</span>
           </figcaption>
           <p class="scaffold-body" id="policy-rate-note">版位已预留（<code>policyRateNote</code>）。下期有核验文案后由数据层注入，不在此编造利率。</p>
         </figure>
@@ -690,8 +693,9 @@
         <div class="panel">
           <h3 class="panel-h">主要来源</h3>
           <ul class="src-list">
-            <li><b>国家统计局</b>　2026 年 9 月 CPI/PPI（10-14）、10 月 PMI（10-31）、前三季度国民经济运行情况（10-19）、固定资产投资（10-19）、70 城房价（10-19）、1—9 月规模以上工业企业利润（10-27）</li>
-            <li><b>中国人民银行 / 中国外汇交易中心 / 中央国债登记结算公司（中债）</b>　2026 年前三季度金融统计数据报告（10-14）、10 月 20 日 LPR 公告、10 月 26 日 MLF 操作、人民币汇率中间价、中债国债收益率曲线（每日 17:30 发布）</li>
+            <li><b>国家统计局</b>　2026 年 9 月 CPI/PPI（10-14）、10 月 PMI（10-31）、前三季度国民经济运行情况（10-19）、固定资产投资（10-19）、70 城房价（10-19）、商品房待售面积（10-19）、1—9 月规模以上工业企业利润（10-27）</li>
+            <li><b>中国人民银行 / 中国外汇交易中心 / 中央国债登记结算公司（中债）</b>　2026 年前三季度金融统计数据报告（10-14）、10 月 20 日 LPR 公告、公开市场业务公告［2026］第13号（10-30，隔夜 OMO 1.25% 自 11-02 实施）、人民币汇率中间价、CFETS 人民币汇率指数（11-02 发布）、中债国债收益率曲线（11-06）</li>
+            <li><b>财政部</b>　2026 年 1—9 月财政收支情况（10-23）：专项债进度、一般公共预算</li>
             <li><b>海关总署</b>　经国家统计局转引的进出口数据</li>
             <li><b>美国劳工统计局（BLS）</b>　CPI-U 与非农就业月度发布；<b>美国经济分析局（BEA）</b>　9 月 PCE（10-29）；<b>美国商务部</b>　三季度 GDP 初值（10-29）；<b>美联储</b>　FOMC 声明（9-16 / 10-28）、经济预测摘要与会议纪要（10-07）；<b>纽约联储</b>　消费者预期调查</li>
             <li><b>美国能源信息署（EIA）</b>　布伦特现货月均价序列、2026 年全年均价预测；<b>国际能源署（IEA）</b>　全球石油供应平衡与战略储备释放</li>
@@ -702,13 +706,14 @@
         <div class="panel">
           <h3 class="panel-h">口径说明与已知局限</h3>
           <ul class="src-list">
-            <li>本页为<strong>静态快照</strong>，不含实时行情接口，价格数据截至 2026 年 11 月 3 日收盘（人民币中间价截至 11 月 4 日），国内宏观数据截至各指标最近一次发布。10 月 CPI/PPI/社零/信贷尚未发布，沿用 9 月。中国 10 年期国债收益率沿用 10 月 29 日中债 1.6233%，本期未覆盖未核验的第三方报价。</li>
+            <li>本页为<strong>静态快照</strong>，不含实时行情接口，价格数据截至 2026 年 11 月 3 日收盘（人民币中间价截至 11 月 4 日；中债 10 年期国债截至 11 月 6 日），国内宏观数据截至各指标最近一次发布。10 月 CPI/PPI/社零/信贷尚未发布，沿用 9 月。中国 10 年期国债收益率采用 11 月 6 日中债 <strong>1.5868%</strong>。自 11 月 2 日起政策利率主锚为隔夜 OMO <strong>1.25%</strong>，不再把 7 天 OMO 1.40% 当作唯一政策利率。</li>
             <li>布伦特月均价统一采用 <strong>EIA 布伦特现货月均价（RBRTE）</strong>：1—9 月为官方月度均价；10 月柱为 10 月 29 日收盘 114.88、11 月柱为 11 月 3 日收盘 103.60（图注已标明，非月均值）。</li>
             <li><strong>现货黄金</strong>统一采用伦敦现货金收盘价（10 月 29 日 4021.21 美元/盎司），与纽约商品交易所 12 月黄金期货（10 月 29 日 4033.30 美元）不是同一价格，不要混用。</li>
             <li>关键交易日图中 10 月 15 日的布伦特、WTI 与黄金收盘价未能独立复核，与当日早盘行情方向一致；其余六个交易日均有新华社 / 中国证券报 / Wind / 华尔街见闻 / 金十财经收盘数据可查。</li>
             <li>「9 月社会消费品零售总额 42 433 亿元、同比 +1.1%」为国家统计局原始发布；<strong>41 969 亿元、同比 +2.4% 是前三季度累计的餐饮收入</strong>，两者口径不同，不可混用。</li>
             <li>「1—9 月规上工业利润 +15.5%」按统计局<strong>可比口径</strong>计算，与上年同期公布的绝对额不可直接相减；分行业数据取自统计局分行业表，石油、煤炭及其他燃料加工业因上年同期为亏损而无法计算同比增速。</li>
-            <li>美国 10 年期国债收益率采用 11 月 2 日的 <strong>4.912%</strong>；中国 10 年期国债收益率仍为中债 10 月 29 日收盘 <strong>1.6233%</strong>（本期未获可独立核验的更新），利差约 <strong>3.29 个百分点</strong>，两个时点不同，不可当作同一交易日利差。</li>
+            <li>美国 10 年期国债收益率采用 11 月 2 日的 <strong>4.912%</strong>；中国 10 年期国债收益率采用中债 11 月 6 日收盘 <strong>1.5868%</strong>，利差约 <strong>3.33 个百分点</strong>（4.912 − 1.5868），两个时点不同，不可当作同一交易日利差。</li>
+            <li>近似实际利率 = 中债 10 年期国债 1.5868% − 9 月核心 CPI 同比 1.0% = <strong>0.5868 个百分点</strong>，非正式官方实际利率；核心 CPI 与国债时点不同。专项债、一般公共预算取财政部 10-23 原文；商品房待售面积取统计局 10-19 原文。权益锚（盈利/ROE/PE 分位）本期不填。</li>
             <li>美国季度 GDP 一律标注 <strong>SAAR（季环比折年率）</strong>，中国 GDP 默认同比，禁止并排比快慢。</li>
             <li>本页内容为公开数据整理与观点转述，<strong>不构成任何投资建议</strong>。</li>
           </ul>
@@ -726,14 +731,14 @@
       <p>中国主线观察台：理解 · 学习 · 长周期坐标 · 决策锚。</p>
     </div>
     <div class="foot-meta">
-      <span id="stamp-built">页面生成：2026-11-04</span>
-      <span id="stamp-cutoff">数据截至：2026-11-03</span>
+      <span id="stamp-built">页面生成：2026-11-07</span>
+      <span id="stamp-cutoff">数据截至：2026-11-06</span>
       <span>不构成投资建议</span>
     </div>
   </div>
 </footer>
 
-<script src="assets/data.js?v=48"></script>
-<script src="assets/app.js?v=48"></script>
+<script src="assets/data.js?v=49"></script>
+<script src="assets/app.js?v=49"></script>
 </body>
 </html>
