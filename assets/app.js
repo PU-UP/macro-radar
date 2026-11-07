@@ -769,7 +769,7 @@
       if (rr.value != null && rr.unit) txt = rr.value + rr.unit + (rr.note ? ' · ' + rr.note : '');
       if (txt) {
         fillSlot('slot-real-rate', 'real-rate-proxy',
-          '<b>近似实际利率</b>（非正式官方口径）' + txt +
+          '<b>近似实际利率</b>（非正式官方口径）：' + txt +
           (rr.formula ? '<br>公式：' + rr.formula : '') +
           (rr.source ? '<br>来源：' + rr.source : ''), true);
       }
@@ -793,8 +793,14 @@
     var pf = china.propertyFixed || {};
     if (pf.hhMediumLongLoan) {
       var hh = pf.hhMediumLongLoan;
+      var hhTxt = hh.display;
+      if (!hhTxt && hh.value != null) {
+        hhTxt = (hh.unit && hh.unit.indexOf('%') === -1)
+          ? ((hh.value > 0 ? '+' : '') + hh.value + ' ' + hh.unit)
+          : (signedPct(hh.value) + '%');
+      }
       fillSlot('slot-hh-loan', 'hh-medium-long-loan',
-        (hh.display || (hh.value != null ? signedPct(hh.value) + '%' : '')) +
+        (hhTxt || '') +
         (hh.basis ? ' · 口径：' + hh.basis : '') +
         (hh.source ? '<br>来源：' + hh.source : ''), true);
     }
