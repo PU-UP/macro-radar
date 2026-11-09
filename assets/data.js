@@ -10,9 +10,9 @@ window.MACRO = (function () {
 
   return {
     meta: {
-      builtAt: '2026-11-07',
-      dataCutoff: '2026-11-06',
-      stamp: '数据截至 2026-11-06'
+      builtAt: '2026-11-09',
+      dataCutoff: '2026-11-09',
+      stamp: '数据截至 2026-11-09'
     },
 
     purpose: '中国主线观察台：理解当下状态、学习口径、标定长周期坐标、给出可证伪的决策条件；美国与全球只作外溢风向标。',
@@ -33,7 +33,7 @@ window.MACRO = (function () {
         state: '重新抬头',
         level: 4,
         tone: 'risk',
-        note: '9 月 PPI +5.0% 创四年新高；美国 9 月核心 PCE 升至 +3.1%，三季度 GDP SAAR +3.4%（季环比折年率，不可与中国同比混比）。'
+        note: '10 月 CPI 同比 +0.7%、核心 CPI +0.8%、PPI +5.7%；美国 9 月核心 PCE 升至 +3.1%，三季度 GDP SAAR +3.4%（季环比折年率，不可与中国同比混比）。'
       },
       {
         id: 'policy',
@@ -56,9 +56,9 @@ window.MACRO = (function () {
     /* ---------- 核心读数 ---------- */
     kpis: [
       { g: 'cn', name: '前三季度 GDP 同比', value: '+4.6', unit: '%', foot: '三季度 +4.5%，较二季度回升 0.2pct', src: '国家统计局 2026-10-19', dir: 'up' },
-      { g: 'cn', name: '9 月 CPI 同比', value: '+0.9', unit: '%', foot: '环比 +0.2%', src: '国家统计局 2026-10-14', dir: 'up' },
-      { g: 'cn', name: '9 月核心 CPI 同比', value: '+1.0', unit: '%', foot: '与上月持平', src: '国家统计局 2026-10-14', dir: 'flat' },
-      { g: 'cn', name: '9 月 PPI 同比', value: '+5.0', unit: '%', foot: '2022 年 7 月以来新高，环比 +1.2%', src: '国家统计局 2026-10-14', dir: 'up' },
+      { g: 'cn', name: '10 月 CPI 同比', value: '+0.7', unit: '%', foot: '环比持平', src: '国家统计局 2026-11-09', dir: 'down' },
+      { g: 'cn', name: '10 月核心 CPI 同比', value: '+0.8', unit: '%', foot: '较上月回落 0.2pct，环比持平', src: '国家统计局 2026-11-09', dir: 'down' },
+      { g: 'cn', name: '10 月 PPI 同比', value: '+5.7', unit: '%', foot: '环比 +0.7%；购进价格同比 +7.9%', src: '国家统计局 2026-11-09', dir: 'up' },
       { g: 'cn', name: '1—9 月规上工业利润', value: '+15.5', unit: '%', foot: '9 月单月 +14.4%，汽车制造 −22.8%', src: '国家统计局 2026-10-27', dir: 'up' },
       { g: 'cn', name: '10 月制造业 PMI', value: '49.3', unit: '', foot: '比上月 −0.8，重回收缩区间', src: '国家统计局 2026-10-31', dir: 'down' },
       { g: 'cn', name: '10 月非制造业 PMI', value: '49.7', unit: '', foot: '商务活动指数，比上月 −0.5', src: '国家统计局 2026-10-31', dir: 'down' },
@@ -92,26 +92,26 @@ window.MACRO = (function () {
     charts: {
       cnPrices: {
         type: 'line',
-        x: MONTHS_9,
-        yMin: -2, yMax: 6,
+        x: MONTHS_10,
+        yMin: -2, yMax: 7,
         refLines: [{ value: 0, label: '0%', tone: 'cn' }],
         series: [
-          { name: 'PPI 同比', color: 'cn', data: [-1.4, -0.9, 0.5, 2.8, 3.9, 4.1, 3.5, 3.8, 5.0], width: 2.6, fill: true },
-          { name: 'CPI 同比', color: 'ink', data: [0.2, 1.3, 1.0, 1.2, 1.2, 1.0, 0.5, 0.8, 0.9], width: 2.4 },
-          { name: '核心 CPI 同比', color: 'us', data: [null, null, 1.1, 1.2, 1.1, 1.0, 0.9, 1.0, 1.0], width: 2.2, dash: '5 4' }
+          { name: 'PPI 同比', color: 'cn', data: [-1.4, -0.9, 0.5, 2.8, 3.9, 4.1, 3.5, 3.8, 5.0, 5.7], width: 2.6, fill: true },
+          { name: 'CPI 同比', color: 'ink', data: [0.2, 1.3, 1.0, 1.2, 1.2, 1.0, 0.5, 0.8, 0.9, 0.7], width: 2.4 },
+          { name: '核心 CPI 同比', color: 'us', data: [null, null, 1.1, 1.2, 1.1, 1.0, 0.9, 1.0, 1.0, 0.8], width: 2.2, dash: '5 4' }
         ],
         unit: '%'
       },
 
       scissors: {
         type: 'bar',
-        x: MONTHS_9,
-        yMin: -3, yMax: 5,
+        x: MONTHS_10,
+        yMin: -3, yMax: 6,
         refLines: [{ value: 0, label: '0', tone: 'ink', anchor: 'start' }],
         series: [{
           name: 'PPI − CPI',
           color: 'cn',
-          data: [-1.6, -2.2, -0.5, 1.6, 2.7, 3.1, 3.0, 3.0, 4.1]
+          data: [-1.6, -2.2, -0.5, 1.6, 2.7, 3.1, 3.0, 3.0, 4.1, 5.0]
         }],
         unit: '个百分点'
       },
@@ -237,23 +237,22 @@ window.MACRO = (function () {
 
       ppiIndustry: {
         type: 'hbar',
-        yMin: -6, yMax: 36,
+        yMin: -6, yMax: 40,
         series: [{
-          name: '9 月 PPI 同比',
+          name: '10 月 PPI 同比',
           color: 'cn',
           data: [
-            { label: '煤炭开采和洗选业', value: 35.3 },
-            { label: '石油和天然气开采业', value: 24.5 },
-            { label: '石油煤炭及其他燃料加工', value: 21.6 },
-            { label: '有色金属冶炼和压延加工', value: 21.4 },
-            { label: '化学原料和化学制品', value: 12.1 },
-            { label: '电气机械和器材制造', value: 6.2 },
-            { label: '计算机通信和其他电子', value: 5.8 },
-            { label: '汽车制造业', value: -2.0 },
-            { label: '非金属矿物制品业', value: -2.5 },
-            { label: '医药制造业', value: -3.3 },
-            { label: '电力热力生产和供应业', value: -3.9 },
-            { label: '酒饮料和精制茶制造业', value: -5.3 }
+            { label: '煤炭开采和洗选业', value: 36.6 },
+            { label: '石油和天然气开采业', value: 35.0 },
+            { label: '石油煤炭及其他燃料加工', value: 29.9 },
+            { label: '有色金属冶炼和压延加工', value: 18.6 },
+            { label: '化学原料和化学制品', value: 16.4 },
+            { label: '计算机通信和其他电子', value: 5.9 },
+            { label: '汽车制造业', value: -1.8 },
+            { label: '非金属矿物制品业', value: -1.6 },
+            { label: '医药制造业', value: -3.2 },
+            { label: '电力热力生产和供应业', value: -3.8 },
+            { label: '酒饮料和精制茶制造业', value: -5.2 }
           ]
         }],
         unit: '%'
@@ -330,12 +329,12 @@ window.MACRO = (function () {
         },
         policyRateNote: '自 2026-11-02 起，公开市场主要操作品种为隔夜逆回购，操作利率 1.25%（固定利率、数量招标）。7 天期逆回购改为固定数量、利率招标，不再作为固定利率的主政策锚。来源：中国人民银行公开市场业务公告［2026］第13号（2026-10-30）。',
         realRateProxy: {
-          value: 0.5868,
+          value: 0.7868,
           unit: ' 个百分点',
-          formula: 'cn10y − coreCpiYoY = 1.5868 − 1.0',
-          note: '近似，非正式官方实际利率；cn10y 截至 2026-11-06，核心 CPI 截至 2026-09。并列 lpr1y − 核心 CPI = 2.00 个百分点（LPR 1 年期 3.00%，2026-10-20）',
-          coreCpiYoY: { value: 1.0, asOf: '2026-09', source: '国家统计局 2026-10-14' },
-          source: '中债国债收益率曲线 2026-11-06；国家统计局核心 CPI（2026-10-14 发布）；LPR 中国人民银行 2026-10-20'
+          formula: 'cn10y − coreCpiYoY = 1.5868 − 0.8',
+          note: '近似，非正式官方实际利率；cn10y 截至 2026-11-06，核心 CPI 截至 2026-10。并列 lpr1y − 核心 CPI = 2.20 个百分点（LPR 1 年期 3.00%，2026-10-20）',
+          coreCpiYoY: { value: 0.8, asOf: '2026-10', source: '国家统计局 2026-11-09' },
+          source: '中债国债收益率曲线 2026-11-06；国家统计局核心 CPI（2026-11-09 发布）；LPR 中国人民银行 2026-10-20'
         }
       },
       fiscal: {
@@ -591,7 +590,7 @@ window.MACRO = (function () {
       { d: '2026-11-02', t: '公开市场主要操作品种切换为隔夜逆回购，操作利率 1.25%', tag: '中国货币', tone: 'cn', body: '中国人民银行公开市场业务公告［2026］第13号（2026-10-30）：隔夜逆回购采用固定利率、数量招标，操作利率 1.25%；7 天期逆回购改为固定数量、利率招标，不再作为固定利率主政策锚。' },
       { d: '2026-11-02', t: '十四届全国人大常委会第二十五次会议开幕（11 月 2—6 日）', tag: '中国政策', tone: 'cn', body: '增量政策的可能窗口；截至数据截止日尚未纳入可核验的决议文本。' },
       { d: '2026-11-06', t: '中国 10 年期国债收益率报 1.5868%', tag: '中国利率', tone: 'cn', body: '中债国债收益率曲线 2026-11-06；较上期快照所用 10-29 的 1.6233% 下行。' },
-      { d: '2026-11-09', t: '中国 10 月 CPI / PPI 预计公布', tag: '前瞻', tone: 'ink', body: '10 月物价尚未纳入本期快照；正刊继续使用 9 月 CPI +0.9%、核心 CPI +1.0%、PPI +5.0%。', future: true },
+      { d: '2026-11-09', t: '中国 10 月 CPI +0.7%、PPI +5.7%', tag: '价格', tone: 'cn', body: '国家统计局 09:30 发布：CPI 同比 +0.7%、环比持平；核心 CPI（不包括食品和能源）同比 +0.8%、环比持平。食品同比 −2.9%，其中鲜菜 −16.9%、下拉约 0.31 个百分点。PPI 同比 +5.7%、环比 +0.7%；生产资料同比 +7.4%（上拉约 5.77 个百分点），生活资料 −0.1%。PPI − CPI 剪刀差扩大至 5.0 个百分点（作者计算）。' },
       { d: '2026-11-10', t: '美国 10 月 CPI 公布', tag: '前瞻', tone: 'ink', body: '观察能源涨价向核心商品的传导，以及住房分项能否回落。', future: true },
       { d: '2026-11-18', t: '美联储 10 月会议纪要公布（待发布）', tag: '前瞻', tone: 'ink', body: '解读 10:2 分歧与沃什记者会表述的关键文本。', future: true },
       { d: '2026-11-29', t: 'OPEC+ 部长级会议与 JMMC（待召开）', tag: '前瞻', tone: 'ink', body: '确定 2027 年产量政策框架与各成员产能基数。', future: true },
