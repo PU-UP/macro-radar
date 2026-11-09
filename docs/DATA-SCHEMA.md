@@ -1,10 +1,10 @@
-# data.js 字段草案（v1.1）
+# data.js 字段草案（v1.2）
 
-状态：v1 改版方向已获同意（2026-11-04）；**本轮字段增量已获用户确认**（2026-11-07，宏观字段评估通过）  
+状态：v1 改版方向已获同意（2026-11-04）；v1.1 宏观字段增量已获用户确认（2026-11-07）；**估值层字段形状用户确认 2026-11-09（经 @professor）**。  
 原则：中国主线；美国/全球为外溢；服务四层用途——理解 / 学习 / 康波坐标 / 决策锚。  
 用途边界：年频观察；宽基 / 行业 / 黄金 ETF；低频再平衡。**不是交易信号，不给出目标价或仓位指令。**
 
-本文件是 **schema 契约**。v1 部分键（`china.propertyFixed` / `spillover` / `longCycle` / `decisionAnchors`）已有生产占位。**本轮只扩契约，禁止在 `assets/data.js` 发明未核验数值。** @macro 下期按本契约填数与核验；@Creator 按此铺版；@professor 认领学习展开。
+本文件是 **schema 契约**。v1 / v1.1 部分键已有生产占位。**本 PR 只扩契约**（`china.equityAnchor` → 五只宽基 `indices[]`），**禁止在 `assets/data.js` 发明未核验数值。** @macro 下期按本契约填数与核验；@Creator 按此铺版；@professor 认领学习展开。
 
 ## 顶层结构（目标）
 
@@ -88,16 +88,72 @@ window.MACRO = {
 
 **禁止**自造「财政脉冲 / fiscal impulse」单一数字。若无单一官方序列，财政立场写入 `decisionAnchors` 条件句，不进 KPI。
 
-### 1.7 `china.equityAnchor`（轻量；亦可挂在 `decisionAnchors` 中 id=`equity` 的 `metrics`）
+### 1.7 `china.equityAnchor`（v1.2 估值层：按指数分列）
 
-数据落点优先本命名空间；`decisionAnchors.equity.metrics` 只引用这些字段 id，**禁止两处各写一套无出处数字**。
+数据落点优先本命名空间；`decisionAnchors` 的 `metrics` / `watch` **只引用字段 id**（如 `equityAnchor.csi300.pePercentile`），**禁止两处各写一套数**。
 
-用途：年频**风险预算条件**（宽基 / 行业 / 黄金 ETF、低频再平衡），**不是目标价、不是交易信号**。
+用途：年频**风险预算加减**（宽基 ETF、低频再平衡），**不是目标价、不是买卖开关、不是交易信号**。宽广度本期不加。
 
-| 字段 | 说明 | 优先级 |
-|------|------|--------|
-| earningsGrowth 和/或 roe | 须**指名指数**（如沪深 300 / 中证全指）的盈利增速和/或 ROE；来源为交易所或中证指数等官方 / 准官方 | 有稳定源则录 |
-| pePercentile | 固定指数 + 固定回看窗口（写入字段，如 10 年）+ 来源。**无免费稳定源时标「暂定 / 未独立复核」**，不得假装已核 | 暂定可 |
+**本期范围（五只宽基，暂不加行业 / 美股）：**
+
+| `id`（稳定，供 decisionAnchors 引用） | `code` | `name` |
+|--------------------------------------|--------|--------|
+| `csi300` | `000300` | 沪深300 |
+| `csi500` | `000905` | 中证500 |
+| `csi1000` | `000852` | 中证1000 |
+| `chinext` | `399006` | 创业板指 |
+| `star50` | `000688` | 科创50 |
+
+#### 评估结论（2026-11-09，经 @professor；本 PR 不写入 `data.js`）
+
+- **`peTTM`：** 中证指数公司 factsheet 对多数宽基提供「滚动市盈率」，并注明「指数指标均采用个股计算用股本计算得出」——可作官方 peTTM 候选源。`weighting` 须与指数官方一致，填「计算用股本」。示例（截至 **2026-10-30** 的公开 factsheet，**仅说明候选源形态，本期不得抄入 `data.js`**）：000300=12.61、000905=21.59、000852=25.08、000688=55.41。创业板指 **399006** 优先深交所 / 中证可核验稿；无则该指数 `peTTM` 留空（`verificationStatus: 'empty'`）。
+- **`pePercentile`：** 公开免费渠道**无**与指数公司一致的稳定官方历史分位序列；第三方（理杏仁 / 股叉叉等）分位互不一致。契约**允许**该字段，但 `verificationStatus` **必须为 `provisional` / `unverified`**，或本期不填（`empty`）。**禁止**标 `verified`，禁止假装已核。
+- **`earningsGrowth` / `roe`：** 有稳定官方 / 准官方源（交易所或中证指数等）则录为对象；否则保持 `null`。
+
+#### 字段形状
+
+`verificationStatus`：`empty` | `verified` | `provisional` | `unverified`。`empty` = 本期不填；`verified` = 已独立回溯官方 / 约定交叉源并写入核验文档；`provisional` / `unverified` = 须在展示层标明「暂定 / 未独立复核」。
+
+`pePercentile.value` 单位统一为 **0–100 的百分位**（`unit: 'percent'`），禁止 0–1 与 0–100 混用。默认回看 `lookbackDefaultYears`（10 年），可被单指数 `pePercentile.lookbackYears` 覆盖。
+
+`earningsGrowth` / `roe` 有源时的对象形状与 `peTTM` 同级（`value` / `unit` / `asOf` / `source` / `sourceUrl` / `verificationStatus`）；无源则为 `null`，不要放空对象假装有数。
+
+```js
+china.equityAnchor: {
+  version: '1.2',
+  purpose: '年频风险预算条件（宽基 ETF），非目标价、非交易信号',
+  lookbackDefaultYears: 10,  // pePercentile 默认回看；可被单指数覆盖
+  indices: [
+    {
+      id: 'csi300',          // 稳定 id，供 decisionAnchors 引用
+      code: '000300',
+      name: '沪深300',
+      peTTM: {
+        value: null,         // number | null
+        weighting: '计算用股本', // 须与指数官方一致；中证 factsheet 口径
+        asOf: null,
+        source: null,
+        sourceUrl: null,
+        verificationStatus: 'empty' // empty | verified | provisional | unverified
+      },
+      pePercentile: {
+        value: null,         // 0–100 的百分位；禁止与 0–1 混用
+        unit: 'percent',
+        lookbackYears: 10,
+        asOf: null,
+        source: null,
+        sourceUrl: null,
+        verificationStatus: 'empty' // 无官方分位序列时不得为 verified
+      },
+      earningsGrowth: null,  // 可选；有稳定源才填对象
+      roe: null
+    }
+    // 其余四只同结构：csi500/000905, csi1000/000852, chinext/399006, star50/000688
+  ]
+}
+```
+
+v1.1 顶层 `earningsGrowth` / `roe` / `pePercentile` **不再作为生产键**；填数期写入 `indices[]` 各指数对象。渲染层在未改版前可继续读旧顶层键，但不得在旧键发明数字。
 
 ---
 
@@ -142,11 +198,14 @@ longCycle: {
 
 三条**可证伪条件句**，不是荐股/喊单；服务年频风险预算与低频再平衡（宽基 / 行业 / 黄金 ETF），**不更新目标价**。
 
+权益侧本期观察范围 = §1.7 五只宽基（`csi300` / `csi500` / `csi1000` / `chinext` / `star50`）。**行业指数与美股不加。** `metrics` / `watch` **只引用字段 id**，数字只存在于 `china.equityAnchor.indices[]`（及核验文档），**禁止**在决策锚对象里再写一套 PE / 盈利 / ROE。
+
 ```js
 decisionAnchors: [
   { id: 'equity',  title: '股市',   ifThen: '若…则风险预算偏…；若…则需降预期',
-    watch: ['realRateProxy', 'pePercentile', 'cfetsReer', 'brent'],
-    metrics: ['earningsGrowth', 'roe', 'pePercentile'] }, // 引用 china.equityAnchor，可选
+    watch: ['realRateProxy', 'cfetsReer', 'brent'],
+    // pePercentile 无 verified 源时不要写入当期 watch 假装已跟踪
+    metrics: [] }, // 有 verified 源才挂；id 形如 equityAnchor.csi300.peTTM
   { id: 'housing', title: '买房',   ifThen: '…',
     watch: ['reInvestYoY', 'homePriceIndex', 'lpr5y', 'hhMediumLongLoan'] },
   { id: 'career',  title: '行业/创业', ifThen: '…',
@@ -154,7 +213,7 @@ decisionAnchors: [
 ]
 ```
 
-`watch` 示例可含：`realRateProxy`、`specialBondProgress`、`hhMediumLongLoan`、`pePercentile`（有源才挂）、`cfetsReer`、`brent`。无稳定源的字段不要写进当期 `watch` 假装已跟踪。
+`watch` 示例可含：`realRateProxy`、`specialBondProgress`、`hhMediumLongLoan`、`equityAnchor.csi300.peTTM`（有 verified 源才挂）、`cfetsReer`、`brent`。`equityAnchor.*.pePercentile` **仅当** `verificationStatus === 'verified'` 才写入当期 `watch`；当前无官方分位序列，故**不要**写进 watch 假装已跟踪。无稳定源的字段同样不要挂。
 
 每期随数据更新条件，不更新「目标价」。
 
@@ -183,16 +242,20 @@ learnHints: [
 - 中介 / 券商草根库存、非官方去化周期  
 - 自造「财政脉冲」单一指数  
 - 由长周期坐标引申出的买卖点 / 仓位指令  
+- 行业指数 / 美股估值层（本期 `equityAnchor` 不加）  
+- 指数宽广度（本期不加）  
+- 把无官方分位序列的 `pePercentile` 标为 `verified`  
 
 ---
 
 ## 7. 落地顺序
 
 1. **已完成（v1）：** 本文契约入库；Creator 预留导航：地产固投 / 外溢 / 长周期 / 决策锚；macro 已填 `china.propertyFixed` + `spillover` + 首版 `longCycle` / `decisionAnchors`  
-2. **本轮（v1.1，仅契约）：** 信用近似实际利率、财政轻量字段、权益锚、地产需求侧、外溢汇率口径 / CFETS 指数 / 油价滞后注。**不改 `assets/data.js`、不发明数字**  
-3. **下一期数据：** macro 按本契约填 `realRateProxy` / `specialBondProgress` / `hhMediumLongLoan` / `equityAnchor` / `cfetsReer`（**有可核验源才填**）；数字须进 `DATA-VERIFICATION.md`  
-4. **并行：** professor 准备康波与决策课纲；`longCycle` 保持短坐标，不扩展  
-5. 旧键迁移完成后删除对等「美国专题」导航，改为「外溢」
+2. **已完成（v1.1）：** 信用近似实际利率、财政轻量字段、权益锚（旧顶层键）、地产需求侧、外溢汇率口径 / CFETS 指数 / 油价滞后注；macro 已按 v1.1 填已核验槽位，`equityAnchor` 仍留空  
+3. **本轮（v1.2，仅契约）：** `china.equityAnchor` 改为五只宽基 `indices[]`（peTTM / pePercentile / 可选 earningsGrowth·roe）。**不改 `assets/data.js` 数值、不发明数字、不把 factsheet 示例抄入生产数据**  
+4. **下一期数据：** macro 按本契约填 `indices[]` 的 `peTTM`（中证 factsheet 等可独立核验源才填；399006 无深交所/中证可核验稿则留空）；`pePercentile` 无官方分位序列则 `empty` 或 `provisional` / `unverified`，**不得 `verified`**；`earningsGrowth` / `roe` 有稳定官方源才填。数字须进 `DATA-VERIFICATION.md`  
+5. **并行：** professor 准备康波与决策课纲；`longCycle` 保持短坐标，不扩展  
+6. 旧键迁移完成后删除对等「美国专题」导航，改为「外溢」
 
 ## 8. DoD（字段层）
 
@@ -204,5 +267,8 @@ learnHints: [
 - `realRateProxy` 展示为近似，非正式官方实际利率  
 - 两融 / 北向不进主 KPI  
 - 无自造财政脉冲；库存仅官方待售面积等口径  
-- `pePercentile` 无免费稳定源则标暂定 / 未独立复核  
+- `pePercentile` 无官方分位序列则不得为 `verified`（`empty` / `provisional` / `unverified`）  
 - 油价 → PPI 滞后注标明为工作假设  
+- **本 PR 只扩契约**；估值层 factsheet 示例不得写入 `data.js`  
+- `equityAnchor` 本期仅五只宽基；行业 / 美股 / 宽广度不加  
+- `decisionAnchors.metrics` / `watch` 只引用 `equityAnchor.{id}.{field}`，不在锚点对象内重复数值  
