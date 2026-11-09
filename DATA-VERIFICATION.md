@@ -461,7 +461,52 @@
 
 - **触发**：扩 `china.equityAnchor` 估值层为五只宽基 `indices[]`（契约优先；经 @professor 确认字段形状）。
 - **结论**：本期**只扩契约**，不改 `assets/data.js` 数值，不把中证 factsheet 示例 PE 写入生产数据。`pePercentile` 无官方分位序列，不得标已核。行业 / 美股 / 宽广度不加。
-- 评估与字段形状见 `docs/DATA-SCHEMA.md` §1.7 / §4；本小节**无新增对外数字**。
+- 评估与字段形状见 `docs/DATA-SCHEMA.md` §1.7 / §4；本小节**无新增对外数字**。填数见下一节第 51 期。
+
+---
+
+## 十三、第 51 期增量核验（2026-11-09，写入 `china.equityAnchor.indices[]`）
+
+- **触发**：第 50 期已落地 DATA-SCHEMA v1.2 估值层契约。维护者于 **2026-11-09** 本机下载官方 PDF，独立抽出滚动市盈率 / PE / ROE；本期只写入已抽出值，**不发明 `pePercentile`**。
+- **核验方式**：对照中证指数有限公司指数单张（标注「滚动市盈率」；注「指数指标均采用个股『计算用股本』计算得出」；日期 **2026-10-30**）与国证/深证信息创业板指单张（页脚 **2026 年 10 月**）。未改 `app.js`；PB 不在 schema，即使单张有市净率也不写入。
+- **结论**：**四只中证 `peTTM` 标 `verified`**；创业板指 `peTTM` 因官方单张只标 PE、未标「滚动市盈率」，标 **`provisional`**；创业板指 `roe` 单张明确，标 **`verified`**；五只 `pePercentile` 全部 **`empty` / value null**。`decisionAnchors` id=`equity` 的 `metrics` 只挂四只已核验中证 `peTTM`；`pePercentile` 与创业板 PE 不进 watch/metrics。
+
+### 13.1 新增数据（逐项来源）
+
+| id | code | name | 字段 | 数值 | verificationStatus | 来源 |
+|----|------|------|------|------|--------------------|------|
+| csi300 | 000300 | 沪深300 | peTTM | **12.61** | verified | 中证指数有限公司指数单张，滚动市盈率，计算用股本，2026-10-30 https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf |
+| csi500 | 000905 | 中证500 | peTTM | **21.59** | verified | 同上路径 `000905factsheet.pdf` |
+| csi1000 | 000852 | 中证1000 | peTTM | **25.08** | verified | 同上路径 `000852factsheet.pdf` |
+| star50 | 000688 | 科创50 | peTTM | **55.41** | verified | 同上路径 `000688factsheet.pdf` |
+| chinext | 399006 | 创业板指 | peTTM | **24.47** | **provisional** | 国证指数单张（深圳证券信息有限公司），表内标 PE（**未写「滚动市盈率」**），加权「调整后自由流通市值」，页脚 2026 年 10 月 https://www.cnindex.com.cn/html2pdf/preview/jj_399006.pdf |
+| chinext | 399006 | 创业板指 | roe | **13.65%** | verified | 同上国证指数单张「估值数据」表，明确列出 ROE |
+| 五只宽基 | — | — | pePercentile | null | **empty** | 无与指数公司一致的官方历史分位序列，禁止发明分位 |
+| 四只中证 + 创业板 earningsGrowth；四只中证 roe | — | — | earningsGrowth / roe | null | — | 除创业板 ROE 外，本期无稳定官方源 |
+
+单张可见但**未写入**的字段：沪深300 市净率约 1.33、中证500 1.86、中证1000 1.94、科创50 6.06、创业板指 PB 3.81。schema 无 PB 键，不进 `data.js`。
+
+### 13.2 本轮口径与表述调整
+
+| # | 调整 | 说明 |
+|---|------|------|
+| 1 | 新增完整 `china.equityAnchor`（`version: '1.2'`，`lookbackDefaultYears: 10`，五只 `indices[]`） | 替代「本期跳过」注释；旧 v1.1 顶层键不作为生产键、不发明数字 |
+| 2 | 四只中证 `peTTM.weighting` = **计算用股本**，`asOf` = **2026-10-30** | 单张脚注「指数指标均采用个股『计算用股本』计算得出」；字段为「滚动市盈率」 |
+| 3 | 创业板指 `peTTM.weighting` = **调整后自由流通市值**，`asOf` = **2026-10**，`verificationStatus` = **provisional** | 官方单张只标 PE、未标滚动；与中证滚动市盈率 **不可混比** |
+| 4 | 创业板指 `roe` 写入对象 | 单张明确 ROE 13.65；其余指数 `roe` / 全部 `earningsGrowth` 保持 `null` |
+| 5 | `decisionAnchors` id=`equity`：`metrics` 挂四只中证 `equityAnchor.*.peTTM` | 创业板 peTTM 因 provisional 不进 watch/metrics；`pePercentile` 不进 watch |
+| 6 | `meta.dataCutoff` / `stamp` / `builtAt` 保持 **2026-11-09** | 估值 asOf 为 2026-10-30（创业板为 2026-10），在核验与口径说明中标明 |
+| 7 | 资源引用版本号由 `?v=51` 更新为 **`?v=52`** | 防止 CDN 缓存；`app.js` 未改渲染，脚手架「版位已预留」留给 Creator |
+| 8 | 补 `risks` 三处对象字面量缺逗号（油价 / 美联储 / 外部平衡卡片的 `p` 与 `tag` 之间） | 既有语法错误，会导致 `data.js` 无法解析；**非数值变更** |
+
+### 13.3 本轮未纳入 / 仍须注意的项
+
+1. **`pePercentile`**：无官方分位序列，五只均为 `empty`，不得标 `verified`，不得用第三方分位冒充。
+2. **创业板指 PE 24.47**：未标「滚动市盈率」，与中证四只滚动市盈率口径不同，**不可共轴对照**。
+3. **PB / 市净率**：单张有数，schema 无字段，**未写入**。
+4. **行业指数 / 美股 / 宽广度**：v1.2 范围外，不加。
+5. **10 月社零 / 信贷 / 海关 / 美国 10 月 CPI**：无本期独立核验，正刊继续使用既有快照。
+6. **财政脉冲**：无单一官方序列，**未发明**。
 
 ---
 

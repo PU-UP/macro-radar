@@ -314,7 +314,7 @@ window.MACRO = (function () {
       { k: '生产经营活动预期', v: '53.4', s: '比上月 −0.4' }
     ],
 
-    /* ---------- 中国主线：信用 / 财政 / 地产固投（权益锚本期不填） ---------- */
+    /* ---------- 中国主线：信用 / 财政 / 地产固投 / 权益锚 ---------- */
     china: {
       credit: {
         asOf: '2026-11-06',
@@ -417,8 +417,145 @@ window.MACRO = (function () {
           source: '国家统计局 2026-10-19',
           sourceUrl: 'https://www.stats.gov.cn/sj/zxfb/202610/t20261019_1965615.html'
         }
+      },
+      /* v1.1 顶层 earningsGrowth / roe / pePercentile 不再作为生产键，不在旧键发明数字。
+       * 现有 app.js hydrate 仍读旧顶层键，故本对象只写 indices[]；Creator 另开 PR 按 v1.2 渲染。
+       * PB 不在 schema 内，即使 factsheet 有市净率也不写入。 */
+      equityAnchor: {
+        version: '1.2',
+        purpose: '年频风险预算条件（宽基 ETF），非目标价、非交易信号',
+        lookbackDefaultYears: 10,
+        indices: [
+          {
+            id: 'csi300',
+            code: '000300',
+            name: '沪深300',
+            peTTM: {
+              value: 12.61,
+              weighting: '计算用股本',
+              asOf: '2026-10-30',
+              source: '中证指数有限公司指数单张',
+              sourceUrl: 'https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf',
+              verificationStatus: 'verified'
+            },
+            pePercentile: {
+              value: null,
+              unit: 'percent',
+              lookbackYears: 10,
+              asOf: null,
+              source: null,
+              sourceUrl: null,
+              verificationStatus: 'empty'
+            },
+            earningsGrowth: null,
+            roe: null
+          },
+          {
+            id: 'csi500',
+            code: '000905',
+            name: '中证500',
+            peTTM: {
+              value: 21.59,
+              weighting: '计算用股本',
+              asOf: '2026-10-30',
+              source: '中证指数有限公司指数单张',
+              sourceUrl: 'https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000905factsheet.pdf',
+              verificationStatus: 'verified'
+            },
+            pePercentile: {
+              value: null,
+              unit: 'percent',
+              lookbackYears: 10,
+              asOf: null,
+              source: null,
+              sourceUrl: null,
+              verificationStatus: 'empty'
+            },
+            earningsGrowth: null,
+            roe: null
+          },
+          {
+            id: 'csi1000',
+            code: '000852',
+            name: '中证1000',
+            peTTM: {
+              value: 25.08,
+              weighting: '计算用股本',
+              asOf: '2026-10-30',
+              source: '中证指数有限公司指数单张',
+              sourceUrl: 'https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000852factsheet.pdf',
+              verificationStatus: 'verified'
+            },
+            pePercentile: {
+              value: null,
+              unit: 'percent',
+              lookbackYears: 10,
+              asOf: null,
+              source: null,
+              sourceUrl: null,
+              verificationStatus: 'empty'
+            },
+            earningsGrowth: null,
+            roe: null
+          },
+          {
+            id: 'chinext',
+            code: '399006',
+            name: '创业板指',
+            peTTM: {
+              value: 24.47,
+              weighting: '调整后自由流通市值',
+              asOf: '2026-10',
+              source: '国证指数单张',
+              sourceUrl: 'https://www.cnindex.com.cn/html2pdf/preview/jj_399006.pdf',
+              verificationStatus: 'provisional',
+              note: '官方单张只标 PE、未标「滚动市盈率」；加权方式为调整后自由流通市值，与中证「计算用股本」口径不同。'
+            },
+            pePercentile: {
+              value: null,
+              unit: 'percent',
+              lookbackYears: 10,
+              asOf: null,
+              source: null,
+              sourceUrl: null,
+              verificationStatus: 'empty'
+            },
+            earningsGrowth: null,
+            roe: {
+              value: 13.65,
+              unit: '%',
+              asOf: '2026-10',
+              source: '国证指数单张',
+              sourceUrl: 'https://www.cnindex.com.cn/html2pdf/preview/jj_399006.pdf',
+              verificationStatus: 'verified'
+            }
+          },
+          {
+            id: 'star50',
+            code: '000688',
+            name: '科创50',
+            peTTM: {
+              value: 55.41,
+              weighting: '计算用股本',
+              asOf: '2026-10-30',
+              source: '中证指数有限公司指数单张',
+              sourceUrl: 'https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf',
+              verificationStatus: 'verified'
+            },
+            pePercentile: {
+              value: null,
+              unit: 'percent',
+              lookbackYears: 10,
+              asOf: null,
+              source: null,
+              sourceUrl: null,
+              verificationStatus: 'empty'
+            },
+            earningsGrowth: null,
+            roe: null
+          }
+        ]
       }
-      /* china.equityAnchor：本期跳过，版位保持脚手架；无独立核验的官方盈利/ROE/PE 分位 */
     },
 
     /* ---------- 外溢：美利率 · 美元 · 油价 → 对中传导 ---------- */
@@ -519,8 +656,14 @@ window.MACRO = (function () {
       {
         id: 'equity',
         title: '股市',
-        ifThen: '若 10 月制造业 PMI 49.3 的收缩被后续景气修复、且布伦特不再二次冲高（11-06 ICE 1 月合约期货收于 98.32 美元/桶），则风险预算约束减轻；若美债利率与美元回升（10 年期美债 CMT 11-06 为 4.86%、美元指数 102.298），则需降低对估值扩张的预期。本期无独立核验的盈利/ROE/PE 分位，不把估值分位写入观察清单。',
-        watch: ['manufacturingPmi', 'brent', 'us10y', 'realRateProxy', 'cfetsReer']
+        ifThen: '若 10 月制造业 PMI 49.3 的收缩被后续景气修复、且布伦特不再二次冲高（11-06 ICE 1 月合约期货收于 98.32 美元/桶），则风险预算约束减轻；若美债利率与美元回升（10 年期美债 CMT 11-06 为 4.86%、美元指数 102.298），则需降低对估值扩张的预期。四只中证宽基滚动市盈率（计算用股本，截至 2026-10-30）已独立核验，数字只在 china.equityAnchor.indices[]；创业板指 PE 官方单张未标滚动，标 provisional、不进 watch/metrics。无官方 PE 分位序列，不把 pePercentile 写入观察清单。',
+        watch: ['manufacturingPmi', 'brent', 'us10y', 'realRateProxy', 'cfetsReer'],
+        metrics: [
+          'equityAnchor.csi300.peTTM',
+          'equityAnchor.csi500.peTTM',
+          'equityAnchor.csi1000.peTTM',
+          'equityAnchor.star50.peTTM'
+        ]
       },
       {
         id: 'housing',
@@ -607,12 +750,12 @@ window.MACRO = (function () {
     risks: [
       {
         h: '油价的二次冲击：压力落在 11 月，缓冲却在见底',
-        p: '布伦特 9 月现货月均 114.08 美元，11 月 6 日 ICE 1 月合约期货收于 98.32 美元（10 月 29 日曾收于 114.88 美元）。10 月 28 日美方告知海湾国家可能在中选后对伊朗动武，地缘溢价仍在。油价对 PPI 的领先约一个月，且弹性并不稳定（8 月油价 +8.7% 只换来 PPI +0.3pct，4 月油价 +13.7% 却带来 +2.3pct），因此不能用单月涨跌线性外推 11 月 PPI。缓冲仍薄：G7 协调的 1 亿桶战略储备释放已接近尾声，美国 SPR 降至约 2.83 亿桶、为 1982 年以来最低。'
+        p: '布伦特 9 月现货月均 114.08 美元，11 月 6 日 ICE 1 月合约期货收于 98.32 美元（10 月 29 日曾收于 114.88 美元）。10 月 28 日美方告知海湾国家可能在中选后对伊朗动武，地缘溢价仍在。油价对 PPI 的领先约一个月，且弹性并不稳定（8 月油价 +8.7% 只换来 PPI +0.3pct，4 月油价 +13.7% 却带来 +2.3pct），因此不能用单月涨跌线性外推 11 月 PPI。缓冲仍薄：G7 协调的 1 亿桶战略储备释放已接近尾声，美国 SPR 降至约 2.83 亿桶、为 1982 年以来最低。',
         tag: '价格'
       },
       {
         h: '美联储：等来的是「热数据」，12 月加息近乎锁定',
-        p: '10 月 28 日 FOMC 以 10:2 维持利率不变，库克与哈马克主张加息 25 个基点；声明把经济评估由「稳健扩张」上调为「强劲」，同时重申通胀仍处高位。沃什明确拒绝提供前瞻指引，并宣布 2027 年起每年一次会议改为不表决利率的宏观策略会议——沟通能见度被系统性压缩。10 月 29 日公布的「热数据」把 12 月 8—9 日会议的加息定价推到 90% 以上：三季度 GDP 折年率 +3.4% 创一年最快，9 月核心 PCE 同比 +3.1%、整体 +3.6% 为四个月最高。10 月非农就业初值 +16.5 万人、失业率 4.1%、时薪同比 +3.1%；8 月非农修订至 +18.6 万人、9 月修订至 +6.0 万人。本期不另推利率路径。SEP 与点阵图要等到 12 月才更新。'
+        p: '10 月 28 日 FOMC 以 10:2 维持利率不变，库克与哈马克主张加息 25 个基点；声明把经济评估由「稳健扩张」上调为「强劲」，同时重申通胀仍处高位。沃什明确拒绝提供前瞻指引，并宣布 2027 年起每年一次会议改为不表决利率的宏观策略会议——沟通能见度被系统性压缩。10 月 29 日公布的「热数据」把 12 月 8—9 日会议的加息定价推到 90% 以上：三季度 GDP 折年率 +3.4% 创一年最快，9 月核心 PCE 同比 +3.1%、整体 +3.6% 为四个月最高。10 月非农就业初值 +16.5 万人、失业率 4.1%、时薪同比 +3.1%；8 月非农修订至 +18.6 万人、9 月修订至 +6.0 万人。本期不另推利率路径。SEP 与点阵图要等到 12 月才更新。',
         tag: '货币政策'
       },
       {
@@ -632,7 +775,7 @@ window.MACRO = (function () {
       },
       {
         h: '外部需求与汇率的两难',
-        p: '前三季度出口 +16.4%、机电产品出口 +23.7% 是当前最强支撑，但美元指数 11 月 6 日纽约收于 102.298、中美 10 年期利差约 3.27 个百分点（美债 Treasury CMT 4.86% 与中债 1.5868% 均为 11-06，同一交易日相减，非交易利差产品）持续构成约束。CFETS 人民币汇率指数 10 月 30 日收于 103.77（环比 +0.55%），优先于日度中间价叙事。11 月 9 日人民币中间价 6.7188（CFETS 中间价，非即期收盘、非离岸 CNH）。若美联储 12 月加息兑现、美元再度走强，人民币汇率与出口价格竞争力将同时承压。'
+        p: '前三季度出口 +16.4%、机电产品出口 +23.7% 是当前最强支撑，但美元指数 11 月 6 日纽约收于 102.298、中美 10 年期利差约 3.27 个百分点（美债 Treasury CMT 4.86% 与中债 1.5868% 均为 11-06，同一交易日相减，非交易利差产品）持续构成约束。CFETS 人民币汇率指数 10 月 30 日收于 103.77（环比 +0.55%），优先于日度中间价叙事。11 月 9 日人民币中间价 6.7188（CFETS 中间价，非即期收盘、非离岸 CNH）。若美联储 12 月加息兑现、美元再度走强，人民币汇率与出口价格竞争力将同时承压。',
         tag: '外部平衡'
       }
     ]
