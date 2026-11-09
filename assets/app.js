@@ -729,24 +729,139 @@
     box.appendChild(call);
   }
 
+  function fieldIdList(arr) {
+    if (!arr || !arr.length) return [];
+    var out = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (typeof arr[i] === 'string') out.push(arr[i]);
+    }
+    return out;
+  }
+
   function renderDecision() {
     var box = document.getElementById('decision-panel');
     if (!box || !D.decisionAnchors) return;
     box.classList.remove('scaffold-panel');
     box.innerHTML = '';
-    box.appendChild(el('h3', 'panel-h', '三条可证伪条件（非荐股）'));
+    box.appendChild(el('h3', 'panel-h', '三条可证伪条件（年频风险预算，非荐股、非目标价）'));
     D.decisionAnchors.forEach(function (a) {
       var card = el('div', 'anchor-card');
       card.appendChild(el('span', 'risk-tag', a.title));
       card.appendChild(el('p', '', a.ifThen));
-      if (a.watch && a.watch.length) {
-        card.appendChild(el('div', 'kpi-src', '观察：' + a.watch.join(' · ')));
+      var metrics = fieldIdList(a.metrics);
+      var watch = fieldIdList(a.watch);
+      if (metrics.length) {
+        card.appendChild(el('div', 'kpi-src', '引用指标：' + metrics.join(' · ')));
+      }
+      if (watch.length) {
+        card.appendChild(el('div', 'kpi-src', '观察：' + watch.join(' · ')));
       }
       box.appendChild(card);
     });
   }
 
-  /* ---------------- schema v1.1 slots (fill only when verified) ---------------- */
+  /* ---------------- schema v1.2 权益锚（五只宽基 indices[]） ---------------- */
+  var EQUITY_INDEX_SLOTS = [
+    { id: 'csi300', name: '沪深300', code: '000300' },
+    { id: 'csi500', name: '中证500', code: '000905' },
+    { id: 'csi1000', name: '中证1000', code: '000852' },
+    { id: 'chinext', name: '创业板指', code: '399006' },
+    { id: 'star50', name: '科创50', code: '000688' }
+  ];
+
+  function findById(arr, id) {
+    if (!arr) return null;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] && arr[i].id === id) return arr[i];
+    }
+    return null;
+  }
+
+  function verificationStatusOf(field) {
+    if (field == null || typeof field !== 'object') return 'empty';
+    if (field.verificationStatus) return field.verificationStatus;
+    if (field.value != null || field.display) return 'unverified';
+    return 'empty';
+  }
+
+  function isRenderableMetric(field) {
+    if (field == null || typeof field !== 'object') return false;
+    if (verificationStatusOf(field) === 'empty') return false;
+    return field.value != null || !!field.display;
+  }
+
+  function formatMetricText(field, opts) {
+    if (field.display) return field.display;
+    var parts = [];
+    if (field.value != null) {
+      if (opts && opts.percent) {
+        parts.push(fmtNum(field.value) + '%');
+      } else {
+        var unit = field.unit && field.unit !== 'percent' ? String(field.unit) : '';
+        parts.push(fmtNum(field.value) + unit);
+      }
+    }
+    if (field.weighting) parts.push('加权：' + field.weighting);
+    if (opts && opts.lookback != null) parts.push('回看 ' + opts.lookback + ' 年');
+    if (field.asOf) parts.push('截至 ' + field.asOf);
+    if (field.note) parts.push(field.note);
+    return parts.join(' · ');
+  }
+
+  function paintMetricRow(body, fieldKey, label, field, opts) {
+    var row = body.querySelector('[data-field="' + fieldKey + '"]');
+    if (!isRenderableMetric(field)) return false;
+    if (!row) {
+      row = el('p', 'eq-field');
+      row.setAttribute('data-field', fieldKey);
+      body.appendChild(row);
+    }
+    row.textContent = '';
+    row.appendChild(el('b', '', label));
+    row.appendChild(document.createTextNode('　' + formatMetricText(field, opts)));
+    var st = verificationStatusOf(field);
+    if (st === 'provisional' || st === 'unverified') {
+      row.appendChild(el('span', 'unverified-mark', '暂定 / 未独立复核'));
+    }
+    if (field.source) {
+      row.appendChild(el('div', 'kpi-src', '来源：' + field.source));
+    }
+    return true;
+  }
+
+  function hydrateEquityAnchor(eq) {
+    eq = eq || {};
+    var list = Array.isArray(eq.indices) ? eq.indices : [];
+    var defaultLookback = eq.lookbackDefaultYears != null ? eq.lookbackDefaultYears : 10;
+
+    EQUITY_INDEX_SLOTS.forEach(function (slot) {
+      var panel = document.getElementById('slot-eq-' + slot.id);
+      var body = document.getElementById('equity-' + slot.id);
+      if (!body) return;
+      var idx = findById(list, slot.id);
+      if (!idx) return;
+
+      var peLookback = (idx.pePercentile && idx.pePercentile.lookbackYears != null)
+        ? idx.pePercentile.lookbackYears
+        : defaultLookback;
+
+      var filled = false;
+      filled = paintMetricRow(body, 'peTTM', '市盈率', idx.peTTM, null) || filled;
+      filled = paintMetricRow(body, 'pePercentile', '估值分位', idx.pePercentile, {
+        percent: true,
+        lookback: peLookback
+      }) || filled;
+      filled = paintMetricRow(body, 'earningsGrowth', '盈利增速', idx.earningsGrowth, null) || filled;
+      filled = paintMetricRow(body, 'roe', 'ROE', idx.roe, null) || filled;
+
+      if (filled && panel) {
+        panel.classList.add('is-filled');
+        panel.classList.remove('scaffold-panel');
+      }
+    });
+  }
+
+  /* ---------------- schema v1.1 slots (fill only when present) ---------------- */
   function fillSlot(panelId, bodyId, html, filled) {
     var panel = document.getElementById(panelId);
     var body = document.getElementById(bodyId);
@@ -811,23 +926,7 @@
         (inv.source ? '<br>来源：' + inv.source : ''), true);
     }
 
-    var eq = china.equityAnchor || {};
-    if (eq.earningsGrowth) {
-      fillSlot('slot-earnings', 'equity-earnings',
-        (eq.earningsGrowth.display || eq.earningsGrowth.index || '') +
-        (eq.earningsGrowth.source ? '<br>来源：' + eq.earningsGrowth.source : ''), true);
-    }
-    if (eq.roe) {
-      fillSlot('slot-roe', 'equity-roe',
-        (eq.roe.display || '') +
-        (eq.roe.source ? '<br>来源：' + eq.roe.source : ''), true);
-    }
-    if (eq.pePercentile) {
-      var pe = eq.pePercentile;
-      var peTxt = pe.display || '';
-      if (pe.provisional) peTxt += ' · 暂定 / 未独立复核';
-      fillSlot('slot-pe', 'equity-pe', peTxt + (pe.source ? '<br>来源：' + pe.source : ''), true);
-    }
+    hydrateEquityAnchor(china.equityAnchor);
 
     // spillover: cfetsReer if present as object or array item
     var cfets = null;

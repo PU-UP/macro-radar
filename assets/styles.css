@@ -620,7 +620,41 @@ html[data-theme="dark"] .theme-btn-dot { background: var(--us); box-shadow: 0 0 
   line-height: 1.55;
   opacity: 0.88;
 }
-.scaffold-panel.is-filled {
+.scaffold-panel.is-filled,
+.panel.is-filled {
   border-style: solid;
   opacity: 1;
+}
+.panel.is-filled .scaffold-body {
+  opacity: 1;
+}
+
+.equity-anchor-block {
+  margin-top: 8px;
+}
+.equity-anchor-block > .section-sub {
+  margin-bottom: 16px;
+}
+.equity-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 8px;
+}
+.eq-field {
+  margin: 0 0 0.55em;
+}
+.eq-field:last-child { margin-bottom: 0; }
+.unverified-mark {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--risk-soft);
+  border: 1px solid var(--risk);
+  padding: 0 6px;
+  margin-left: 8px;
+  border-radius: 2px;
+  vertical-align: middle;
 }

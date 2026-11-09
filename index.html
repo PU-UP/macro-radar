@@ -6,7 +6,7 @@
 <title>宏观观察 Macro Observer · 宏观经济观察</title>
 <meta name="description" content="宏观经济观察台：中国主线（增长、价格、信用、地产固投），美国与全球作外溢风向标；含长周期坐标与决策锚。数据截至 2026 年 11 月 9 日。">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="assets/styles.css?v=52">
+<link rel="stylesheet" href="assets/styles.css?v=53">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E2135'/><path d='M6 22 L12 13 L18 18 L26 8' stroke='%23E4674E' stroke-width='2.5' fill='none'/></svg>">
 </head>
 <body>
@@ -626,35 +626,68 @@
       <header class="section-head">
         <span class="section-idx">玖</span>
         <h2>决策锚</h2>
-        <p class="section-sub">股市 / 买房 / 行业与创业 · 年频风险预算与 ETF 低频再平衡条件句，非择时、非目标价</p>
+        <p class="section-sub">股市 / 买房 / 行业与创业 · 年频风险预算与宽基 ETF 低频再平衡条件句，非买卖开关、非目标价</p>
       </header>
       <div class="panel panel-prose scaffold-panel" id="decision-panel">
         <h3 class="panel-h">占位 · 待 decisionAnchors 字段</h3>
-        <p>三条条件卡将由 <code>decisionAnchors</code> 驱动。本期只预留版位，不写目标价或个股建议。</p>
-        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。v1.2 估值层 <code>indices[]</code>：五只宽基分列，年频风险预算条件，非买卖开关。</p>
+        <p>三条条件卡将由 <code>decisionAnchors</code> 驱动。本期只预留版位；<code>metrics</code> / <code>watch</code> 只展示字段 id，不写估值数字、目标价或个股建议。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。</p>
       </div>
-      <div class="grid-3 schema-slots" data-schema="china.equityAnchor.v1.2">
-        <figure class="panel scaffold-panel" id="slot-earnings">
-          <figcaption>
-            <h3>盈利增速</h3>
-            <span class="fig-note"><code>indices[].earningsGrowth</code> · 五只宽基分列</span>
-          </figcaption>
-          <p class="scaffold-body" id="equity-earnings">版位已预留。落点 <code>china.equityAnchor.indices[]</code>（v1.2）；决策锚只引用字段 id。</p>
-        </figure>
-        <figure class="panel scaffold-panel" id="slot-roe">
-          <figcaption>
-            <h3>ROE</h3>
-            <span class="fig-note"><code>indices[].roe</code> · 有稳定官方源才填</span>
-          </figcaption>
-          <p class="scaffold-body" id="equity-roe">版位已预留。有稳定官方 / 准官方源再填对象；否则保持 <code>null</code>。</p>
-        </figure>
-        <figure class="panel scaffold-panel" id="slot-pe">
-          <figcaption>
-            <h3>估值分位</h3>
-            <span class="fig-note"><code>indices[].pePercentile</code> · 默认回看 10 年</span>
-          </figcaption>
-          <p class="scaffold-body" id="equity-pe">版位已预留。无官方分位序列时标「暂定 / 未独立复核」，不得假装已核。</p>
-        </figure>
+      <div class="equity-anchor-block">
+        <h3 class="panel-h">权益锚 · 五只宽基</h3>
+        <p class="section-sub">年频风险预算加减（宽基 ETF、低频再平衡），不是买卖开关、不是目标价。行业指数 / 美股 / 宽广度不加。落点 <code>china.equityAnchor.indices[]</code>；决策锚只引用字段 id。</p>
+        <div class="equity-index-grid schema-slots" data-schema="china.equityAnchor.v1.2">
+          <figure class="panel scaffold-panel" id="slot-eq-csi300">
+            <figcaption>
+              <h3>沪深300</h3>
+              <span class="fig-note"><code>csi300</code> · 000300 · peTTM / pePercentile（默认回看 10 年）</span>
+            </figcaption>
+            <div class="scaffold-body" id="equity-csi300">
+              <p class="eq-field" data-field="peTTM">版位已预留（<code>peTTM</code>）。有核验值后再填；<code>provisional</code> / <code>unverified</code> 须标「暂定 / 未独立复核」。</p>
+              <p class="eq-field" data-field="pePercentile">版位已预留（<code>pePercentile</code>）。默认回看 10 年；无官方分位序列则保持空位，不得假装已核。</p>
+            </div>
+          </figure>
+          <figure class="panel scaffold-panel" id="slot-eq-csi500">
+            <figcaption>
+              <h3>中证500</h3>
+              <span class="fig-note"><code>csi500</code> · 000905 · peTTM / pePercentile（默认回看 10 年）</span>
+            </figcaption>
+            <div class="scaffold-body" id="equity-csi500">
+              <p class="eq-field" data-field="peTTM">版位已预留（<code>peTTM</code>）。有核验值后再填；<code>provisional</code> / <code>unverified</code> 须标「暂定 / 未独立复核」。</p>
+              <p class="eq-field" data-field="pePercentile">版位已预留（<code>pePercentile</code>）。默认回看 10 年；无官方分位序列则保持空位，不得假装已核。</p>
+            </div>
+          </figure>
+          <figure class="panel scaffold-panel" id="slot-eq-csi1000">
+            <figcaption>
+              <h3>中证1000</h3>
+              <span class="fig-note"><code>csi1000</code> · 000852 · peTTM / pePercentile（默认回看 10 年）</span>
+            </figcaption>
+            <div class="scaffold-body" id="equity-csi1000">
+              <p class="eq-field" data-field="peTTM">版位已预留（<code>peTTM</code>）。有核验值后再填；<code>provisional</code> / <code>unverified</code> 须标「暂定 / 未独立复核」。</p>
+              <p class="eq-field" data-field="pePercentile">版位已预留（<code>pePercentile</code>）。默认回看 10 年；无官方分位序列则保持空位，不得假装已核。</p>
+            </div>
+          </figure>
+          <figure class="panel scaffold-panel" id="slot-eq-chinext">
+            <figcaption>
+              <h3>创业板指</h3>
+              <span class="fig-note"><code>chinext</code> · 399006 · peTTM 未标滚动时标暂定 · 有 ROE 才展示</span>
+            </figcaption>
+            <div class="scaffold-body" id="equity-chinext">
+              <p class="eq-field" data-field="peTTM">版位已预留（<code>peTTM</code>）。有核验值后再填；<code>provisional</code> / <code>unverified</code> 须标「暂定 / 未独立复核」。</p>
+              <p class="eq-field" data-field="pePercentile">版位已预留（<code>pePercentile</code>）。默认回看 10 年；无官方分位序列则保持空位，不得假装已核。</p>
+            </div>
+          </figure>
+          <figure class="panel scaffold-panel" id="slot-eq-star50">
+            <figcaption>
+              <h3>科创50</h3>
+              <span class="fig-note"><code>star50</code> · 000688 · peTTM / pePercentile（默认回看 10 年）</span>
+            </figcaption>
+            <div class="scaffold-body" id="equity-star50">
+              <p class="eq-field" data-field="peTTM">版位已预留（<code>peTTM</code>）。有核验值后再填；<code>provisional</code> / <code>unverified</code> 须标「暂定 / 未独立复核」。</p>
+              <p class="eq-field" data-field="pePercentile">版位已预留（<code>pePercentile</code>）。默认回看 10 年；无官方分位序列则保持空位，不得假装已核。</p>
+            </div>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -748,6 +781,6 @@
 </footer>
 
 <script src="assets/data.js?v=52"></script>
-<script src="assets/app.js?v=52"></script>
+<script src="assets/app.js?v=53"></script>
 </body>
 </html>
