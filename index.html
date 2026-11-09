@@ -631,29 +631,29 @@
       <div class="panel panel-prose scaffold-panel" id="decision-panel">
         <h3 class="panel-h">占位 · 待 decisionAnchors 字段</h3>
         <p>三条条件卡将由 <code>decisionAnchors</code> 驱动。本期只预留版位，不写目标价或个股建议。</p>
-        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。</p>
+        <p class="callout"><span class="callout-tag">契约</span>见 <code>docs/DATA-SCHEMA.md</code> §4。v1.2 估值层 <code>indices[]</code>：五只宽基分列，年频风险预算条件，非买卖开关。</p>
       </div>
-      <div class="grid-3 schema-slots" data-schema="china.equityAnchor.v1.1">
+      <div class="grid-3 schema-slots" data-schema="china.equityAnchor.v1.2">
         <figure class="panel scaffold-panel" id="slot-earnings">
           <figcaption>
             <h3>盈利增速</h3>
-            <span class="fig-note"><code>earningsGrowth</code> · 须指名指数</span>
+            <span class="fig-note"><code>indices[].earningsGrowth</code> · 五只宽基分列</span>
           </figcaption>
-          <p class="scaffold-body" id="equity-earnings">版位已预留。落点 <code>china.equityAnchor</code>；决策锚只引用字段 id。</p>
+          <p class="scaffold-body" id="equity-earnings">版位已预留。落点 <code>china.equityAnchor.indices[]</code>（v1.2）；决策锚只引用字段 id。</p>
         </figure>
         <figure class="panel scaffold-panel" id="slot-roe">
           <figcaption>
             <h3>ROE</h3>
-            <span class="fig-note"><code>roe</code> · 须指名指数</span>
+            <span class="fig-note"><code>indices[].roe</code> · 有稳定官方源才填</span>
           </figcaption>
-          <p class="scaffold-body" id="equity-roe">版位已预留。有稳定官方 / 准官方源再填。</p>
+          <p class="scaffold-body" id="equity-roe">版位已预留。有稳定官方 / 准官方源再填对象；否则保持 <code>null</code>。</p>
         </figure>
         <figure class="panel scaffold-panel" id="slot-pe">
           <figcaption>
             <h3>估值分位</h3>
-            <span class="fig-note"><code>pePercentile</code> · 固定指数 + 回看窗口</span>
+            <span class="fig-note"><code>indices[].pePercentile</code> · 默认回看 10 年</span>
           </figcaption>
-          <p class="scaffold-body" id="equity-pe">版位已预留。无免费稳定源时标「暂定 / 未独立复核」，不得假装已核。</p>
+          <p class="scaffold-body" id="equity-pe">版位已预留。无官方分位序列时标「暂定 / 未独立复核」，不得假装已核。</p>
         </figure>
       </div>
     </div>
