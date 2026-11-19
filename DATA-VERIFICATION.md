@@ -779,4 +779,89 @@
 
 ---
 
+## 十七、第 55 期增量核验（2026-11-19，写入美联储 2026 年 10 月会议纪要，11-18 发布）
+
+- **触发**：时间线 2026-11-18「美联储 10 月会议纪要公布（待发布）」仍为 `future:true` / tag「前瞻」。维护者已对照美联储原文确认纪要于 **2026-11-18 14:00 EST** 正式发布。本轮只写入已独立核验的官方事实，不编造未在原文出现的数字、票数、人名、市场反应或加息概率。
+- **核验方式**：2026-11-19 重新打开下列官方页，按正文转录；任务说明中的预读摘录与原文一致，**无冲突**。未采用新闻转述补原文没有的数字。在 PR #15 已 squash 合入 main（`f47a293`，第 54 期）之后变基并入；中国主线 10 月金融与运行读数保持第 54 期，本轮不改这些数字。
+  1. 美联储新闻稿，For release at 2:00 p.m. EST：https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm （Last Update: November 18, 2026）
+  2. 会议纪要 HTML（权威文本）：https://www.federalreserve.gov/monetarypolicy/fomcminutes20261028.htm
+  3. 会议纪要 PDF：https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20261028.pdf
+  4. FOMC 日历：https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm （Minutes: PDF | HTML, Released November 18, 2026）
+- **结论**：**11-18 时间线条已去掉前瞻标记**，写入 10 月会议纪要可溯源要点（10:2 点名、多数支持本次维持、almost all 认为后续上调目标区间可能合适且大体与 9 月 SEP 一致、data-dependent）。展望卡与外溢 `channel` 补同一事实。**未更新**「12 月加息概率」KPI（仍为 >90%，来源 2026-10-29 债券市场定价）。**未改**中国主线任何数字。**未用**工作人员对 9 月 PCE 的估计覆盖站点已有的 BEA 官方 PCE。`dataCutoff` / `stamp` 保持第 54 期的 **2026-11-16**（纪要是政策文本，不是新的统计 vintage）；`builtAt` **2026-11-19**。资源 `?v=` 升至 **57**（`data.js` / `app.js`）。
+
+### 17.1 新增或更新数据（逐项来源）
+
+官方同一文本：Minutes of the Federal Open Market Committee, October 27–28, 2026；新闻稿宣布于 2026-11-18 14:00 EST 发布。
+
+| 数据 | 数值 / 原文要点 | 来源与日期 |
+|------|----------------|-----------|
+| `meta.dataCutoff` / `stamp` | **2026-11-16**（保持第 54 期；统计 KPI 无新 vintage） | 与第 54 期央行 / 统计局快照一致。纪要是政策文本，不是统计截止日 |
+| `meta.builtAt` | **2026-11-19** | 本轮写入日 |
+| 会议时间 | 2026-10-27 09:30 起，2026-10-28 09:00 续会，**10:30 a.m.** 结束；理事会办公室 | 纪要开篇；文末 “The meeting adjourned at 10:30 a.m. on October 28, 2026.” |
+| 主席 / 副主席 | Kevin Warsh, Chairman；John C. Williams, Vice Chair（站内：沃什） | Attendance |
+| 下次会议 | 2026-12-08 至 12-09 | “It was agreed that the next meeting of the Committee would be held on Tuesday–Wednesday, December 8–9, 2026.” |
+| 联邦基金目标区间 | 维持 **3-3/4 to 4 percent**（站内既有写法 **3.75%–4.00%**，不改口径） | Committee Policy Actions；directive Effective October 29, 2026 |
+| ample reserves | 同时维持 ample reserves 政策 | “reaffirmed the FOMC's policy of maintaining ample reserves in the banking system” |
+| 正式投票 | **10 赞成 / 2 反对** | 声明栏 “approved … by a 10 — 2 vote”；“10 members agreed to maintain” |
+| Voting for | Kevin Warsh, John C. Williams, Michael S. Barr, Michelle W. Bowman, Philip N. Jefferson, Neel Kashkari, Lorie K. Logan, Anna Paulson, Jerome H. Powell, Christopher J. Waller（通行译名：沃什、威廉姆斯、巴尔、鲍曼、杰斐逊、卡什卡里、洛根、保尔森、鲍威尔、沃勒） | 纪要投票名单，与 10-28 声明一致，**不是纪要新发现** |
+| Voting against | Lisa D. Cook and Beth M. Hammack（库克、哈马克），preferred to raise the target range by **1/4 percentage point** | 同上 |
+| 声明级表述（纪要完整收录，与 10-28 声明一致） | 经济 “expanding at a strong pace”；domestic spending resilient；inflation remains elevated；“The accumulation of more information will help the Committee determine the policy stance appropriate to ensure a timely return of inflation to the Committee's 2 percent goal. The Committee will deliver price stability.” | 纪要所附 postmeeting statement |
+| 多数与会者 | **most participants** 支持本次维持目标区间。其中 **many of these participants** 指出继续积累信息有助于确定适时让通胀回到 2% 的政策立场；提到需评估 AI 相关投资需求的持续性、融资条件演变、9 月加息向实体的传导、或地缘局势 | Policymakers' Discussion… Monetary Policy Considerations |
+| 路径 vs 单次会议 | **several** 强调应看联邦基金利率的整体路径，而不是单次会议操作 | 同上 |
+| 与市场隐含路径 | **some** 认为市场隐含的 12 月及明年收紧预期与其认为合适的路径大体一致；其中 **several** 觉得这种一致降低了本次按兵不动的风险 | 同上。**不据此改写**站内 12 月加息概率 KPI |
+| close call | **a few … while supporting** 认为本次维持是 close call | 同上 |
+| 沟通 | **many** 强调须清楚传达：本次维持并不意味着委员会削弱了让通胀及时回到 2% 的承诺 | 同上 |
+| 主张本次加息 | **some participants** 主张本次加息 25bp，理由是通胀仍然过高、几乎看不到缓和迹象，并认为当前立场不够限制性；其中 **a few** 警告继续推迟可能让高通胀固化，或迫使以后更猛烈地收紧 | 同上 |
+| 可支持不变的条件 | **a few … who favored an increase** 表示，若市场清楚理解后续仍可能进一步收紧，他们本来也可以支持本次不变 | 同上 |
+| **前瞻色彩（必须写入）** | **almost all participants** judged that, under their baseline outlooks for inflation and the labor market, **further action to raise the target range** for the federal funds rate—**broadly consistent with the September Summary of Economic Projections**—**would likely be appropriate**, in order to ensure a timely return of inflation to the 2 percent objective | 同上 outlook for monetary policy in the months ahead。中文不得写成「委员会已决定 12 月加息」或「12 月加息已锁定」 |
+| 大于 25bp | **a couple of participants** noted that an increase of **more than 25 basis points** could warrant consideration **at the next meeting** if incoming inflation data were unfavorable。中文写「有与会者（原文 a couple of participants）」，**不说成多数** | 同上 |
+| data-dependent | Future policy decisions would depend on the incoming data, the evolving outlook, and the balance of risks | 同上 |
+| IORB | 理事会**一致**维持 IORB **3.90%**，自 **2026-10-29** 生效 | “the Board … voted unanimously to maintain the interest rate paid on reserve balances to 3.90 percent, effective October 29, 2026.” 写入本核验表，**不新开 KPI** |
+| primary credit rate | 理事会**一致**批准维持 **4.0%** | 紧随 IORB 句：“voted unanimously to approve the establishment of the primary credit rate at the existing level of 4.0 percent.” 该句**未再重复**生效日；与 IORB 同段、与 10-28 决议一致。写入本核验表，不新开 KPI |
+| 工作人员 9 月 PCE 估计 | staff estimated total PCE 12-month **3.6%**、core PCE **3.1%** in September | Staff Review of the Economic Situation。**仅入本核验表**；正刊继续用 BEA 9 月官方 PCE（已是 +3.6% / 核心 +3.1%），不覆盖 |
+| 金融稳定讨论 | 工作人员指出 AI 相关债务快速增长、对冲基金杠杆与资产估值偏高为显著脆弱性；与会者讨论 AI 投资回报不及预期等情景。**不写入正刊 KPI** | Staff Review and Policymakers' Discussion of Financial Stability |
+
+### 17.2 本轮口径与表述调整
+
+| # | 调整 | 说明 |
+|---|------|------|
+| 1 | 时间线 **2026-11-18** 去掉 `future:true` 与标题「（待发布）」；tag「美联储」，tone `us` | 写入发布时间、10:2 点名、多数支持本次维持、almost all 后续加息可能合适（与 9 月 SEP 大体一致）、data-dependent 及官方 URL。不改写 2026-10-28 时间线条 |
+| 2 | 展望卡「美联储：等来的是「热数据」，12 月加息近乎锁定」追加 11-18 纪要要点 | 保留既有 10-28 决议与 11-10 CPI / GDP / PCE / 非农句子。标题「近乎锁定」所依据的仍是 **10-29 市场定价**。仍写「本期不另推利率路径」 |
+| 3 | `spillover.fedFundsTarget.channel` 补一句纪要已确认 almost all 当时认为后续上调可能合适 | **不改** `value` / `asOf` / `source`（仍为 2026-10-28 决议）。传导仍是中国外部融资成本预期 |
+| 4 | `index.html` methods 美联储来源补「10 月会议纪要（11-18）」；加息长文 11-10 段落后加一句纪要摘要；口径说明标明纪要已纳入，并保留第 54 期已写入的 10 月社零 / 信贷 | 不重写整篇文章，不加入市场反应 |
+| 5 | `meta.builtAt` **2026-11-19**，`dataCutoff` / `stamp` 保持 **2026-11-16** | 页眉 stamp、页脚 stamp-cutoff、`index.html` description 仍为数据截至 2026-11-16，与 meta 一致。写入日 ≠ 数据截止日 |
+| 6 | 资源 `?v=` 升至 **57**（`data.js` / `app.js`；`styles.css` 仍为第 54 期的 56） | 不改 `app.js` 逻辑、不改 schema、不碰 `reading-sample/` |
+
+### 17.3 原值 → 正确值（本轮时效更新）
+
+| # | 位置 | 原值 | 正确值 | 性质 | 依据 |
+|---|------|------|--------|------|------|
+| 1 | 时间线 2026-11-18 | `future:true`，tag「前瞻」，标题含「待发布」 | 已发布纪要：almost all 认为后续上调目标区间可能合适；10:2 维持 | 事件落地 | 新闻稿 11-18；纪要 HTML |
+| 2 | 展望卡美联储段 | 止于 11-10 CPI | 追加 11-18 纪要 almost all / SEP / data-dependent | 时效（政策文本） | 纪要 outlook 段 |
+| 3 | `fedFundsTarget.channel` | 仅 10:2 按兵不动 | 补纪要确认的后续加息基线判断；asOf 仍 10-28 | 外溢传导补句 | 同上 |
+
+### 17.4 口径注记
+
+1. **almost all ≠ 已决定 12 月加息。** 原文是 10 月会议时、在基线展望下 “would likely be appropriate”，并写明大体与 9 月 SEP 一致。正刊不得写成委员会新决定或「12 月加息已锁定」。
+2. **a couple ≠ 多数。** 「有与会者（原文 a couple of participants）」保留英文量词。
+3. **声明级措辞不是纪要新发现。** 「强劲」、通胀仍高、将交付价格稳定等已在 10-28 条；纪要新信息只放 11-18 条。
+4. **12 月加息概率 KPI 不更新。** 现为 >90%，来源 2026-10-29 债券市场定价。11-18 纪要发布后的市场定价没有官方数，禁止发明。纪要里 Desk 对会前期货路径的描述属于 10 月会议当时的市场回顾，**不**用来改 KPI。时间线 12-09 前瞻行正文「市场定价 12 月加息概率超过 90%」保持不动，并继续 `future:true`。
+5. **staff PCE 估计不覆盖 BEA。** 工作人员估计 9 月总 PCE 12 个月 3.6%、核心 3.1%，与已有 BEA 官方读数相同量级，正刊继续用 BEA。
+6. **IORB / primary credit 不新开 KPI。** 页面无对应字段。
+7. **中美口径。** 美国只作外溢；不把纪要写成美国专题或中美谁更快。美国 GDP 仍标 SAAR。
+8. **编号。** PR #15 已于合入前占用「第 54 期」和 `?v=56`，并已 squash 合入 main（`f47a293`）。本节在变基后改为第 55 期、`data.js` / `app.js` 的 `?v=` 升至 **57**。
+
+### 17.5 本轮未纳入 / 仍须注意的项
+
+1. **中国主线任何数字**（GDP / CPI / PPI / 社零 / 社融 / 固投 / 地产 / LPR / PMI / 利润 / 汇率 / 油价 / 美债收益率 / `equityAnchor` 等）：**零改动**。
+2. **12 月加息概率 KPI** 与时间线 12-09 前瞻行：不更新、不发明 11-18 后市场定价。
+3. **11-29 OPEC+ 前瞻行**：保持 `future:true`，一字不改。
+4. **2026-10-28 时间线条**：不改写既有 10:2、库克/哈马克、声明「强劲」、沃什拒绝前瞻指引、2027 策略会议。
+5. **金融稳定段 / Desk 调查加息次数 / 长期名义联邦基金利率 3.4% 等**：仅作核验记录或完全不写入正刊，不新开 KPI。
+6. **staff 对 9 月 PCE 的估计**：不覆盖 BEA。
+7. **`docs/DATA-SCHEMA.md` / `reading-sample/` / `app.js` 逻辑**：**未触碰**。
+8. **PR #15 的中国 10 月金融与统计局运行读数**：已随合入后的 main（第 54 期）进入本分支，**本轮不改这些数字**。
+
+---
+
 *本文件为站点数据核验的工作记录，公开数据整理与观点转述不构成任何投资建议。*
