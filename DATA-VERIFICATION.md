@@ -1048,4 +1048,101 @@
 
 ---
 
+## 二十、第 58 期增量核验（2026-11-26，写入 BEA 11-25 官方读数）
+
+- **触发**：时间线到点刷新，**不是**周一每周例行外溢刷新。origin/main 最新为 53cbc9d（第 57 期，PR #19），`meta.dataCutoff` / `stamp` / `builtAt` = 2026-11-23，资源 `assets/data.js?v=59`。无开放 PR。站内时间线在 11-24 至 11-26 窗口没有带 `future:true` /「前瞻」/「待发布」的条目（下一条前瞻是 11-29 OPEC+、12-09 FOMC，均仍未到）。同窗口已落地、且会改 KPI / spillover 的重大官方发布尚未写入：美国经济分析局（BEA）于 **2026-11-25 08:30 EST** 同时发布 (A) Personal Income and Outlays, October 2026；(B) GDP (Second Estimate) and Corporate Profits, 3rd Quarter 2026。本轮只写入这两份新闻稿里出现的数字。
+- **核验方式**：维护者于 2026-11-26（Asia/Shanghai）打开 BEA 新闻稿原文对照；CloudAgent 只使用本填数笔记中的数字与出处，未另寻第三方页面或替代数字。
+  1. 美国经济分析局（主源 A），Personal Income and Outlays, October 2026：https://www.bea.gov/news/2026/personal-income-and-outlays-october-2026
+     EMBARGOED UNTIL RELEASE AT 8:30 a.m. EST, Wednesday, November 25, 2026。
+     原文要点（按原文，不改位数、不四舍五入）：Personal income increased **$201.8 billion (0.7 percent at a monthly rate)** in October；Disposable personal income (DPI) increased **$200.5 billion (0.8 percent)**；PCE increased **$63.8 billion (0.3 percent)**；Personal saving was **$1.00 trillion**；personal saving rate **4.1 percent**；Real PCE decreased **$5.8 billion (less than 0.1 percent at a monthly rate)**，同表 October 行 Real PCE 为 **0.0**（与「不足 0.1%」一致）。From the preceding month, the PCE price index for October increased **0.3 percent**. Excluding food and energy, the PCE price index also increased **0.3 percent**. From the same month one year ago, the PCE price index for October increased **3.8 percent**. Excluding food and energy, the PCE price index increased **3.3 percent** from one year ago。同表 September 行（仅作对照，**不据此发明 9 月同比修订**）：PCE price index **0.5**；PCE price index excluding food and energy **0.3**。Next release: **December 23, 2026**, at 8:30 a.m. EST Personal Income and Outlays, November 2026。**禁止**：不把第三方页面上可能出现的「9 月同比修订为 3.7%」写入站内——11-25 新闻稿没有给出 9 月同比。9 月同比仍以站内已有的 10-29 读数（核心 +3.1%、整体 +3.6%）作为历史叙述，不改写 10-29 时间线条。
+  2. 美国经济分析局（主源 B），GDP (Second Estimate) and Corporate Profits, 3rd Quarter 2026：https://www.bea.gov/news/2026/gdp-second-estimate-and-corporate-profits-3rd-quarter-2026
+     EMBARGOED UNTIL RELEASE AT 8:30 a.m. EST, Wednesday, November 25, 2026。
+     原文要点：Real GDP increased at an annual rate of **4.3 percent** in the third quarter of 2026；second quarter **2.2 percent**。Real GDP was revised up **0.9 percentage point** from the advance estimate, primarily reflecting upward revisions to investment and consumer spending。表：Real GDP Advance **3.4** → Second **4.3**；Current-dollar GDP **5.6 → 6.2**；Real final sales to private domestic purchasers **4.9 → 5.8**；Real GDI Second **4.4**；Average of real GDP and real GDI **4.4**；Gross domestic purchases price index **3.0 → 2.7**；PCE price index **2.1 → 2.1**（未修订）；PCE price index excluding food and energy **2.5 → 2.5**（未修订）。这些季度物价指数是 **SAAR**（从 2026:Q2 到 2026:Q3），不可与上面 10 月 PCE 的同比/环比混用。Profits from current production (corporate profits with inventory valuation and capital consumption adjustments) increased **$206.0 billion** in the third quarter, compared with an increase of **$384.0 billion** in the second quarter。Next release: **December 23, 2026**, at 8:30 a.m. EST GDP (Third Estimate), Industries, Corporate Profits, State GDP, and State Personal Income, 3rd Quarter 2026。硬规则：美国季度 GDP 必须标明 **SAAR（季环比折年率）**，不可与中国同比比快慢。不要写「创一年最快」（二次估计新闻稿没有这句）。
+- **结论**：**10 月 PCE 已纳入**：同比全项 **+3.8%**、核心 **+3.3%**；环比全项与核心均为 **+0.3%**。**三季度实际 GDP 二次估计已纳入**：SAAR **+4.3%**（初值 +3.4%，上修 0.9pct；二季度 +2.2%）。季度 PCE 价格指数二次估计仍为 **+2.1% / 核心 +2.5%**（未修订），这是 SAAR，不是 10 月同比。**未把 9 月同比写成已修订。未更新 12 月加息概率**（KPI 仍为 10-29 债券市场定价 >90%）。**未写入** 11-25 央行 MLF / 7 天逆回购；**未写入** 11-24 流通领域旬报；**未写入**尚未发布的 11-27 规上工业利润、成品油调价窗口。11-29 OPEC+ 与 12-09 FOMC 仍为 `future:true`。油价 / 美债 / 美元指数 / 人民币中间价 / 中债 / 中国月度统计 / LPR **不改**。`dataCutoff` / `stamp` / `builtAt` = **2026-11-26**；资源 `data.js` `?v=60`。核验文档写清：`dataCutoff`=11-26 不等于所有序列都刷新到 11-26。只有 BEA 11-25 的 10 月 PCE 与三季度 GDP 二次估计是新 vintage；其余中国主线、LPR、外溢行情（美债 11-20 / 油价 11-20 / 美元指数 11-20 / 中间价 11-23 / 中债 11-06）保持第 57 期快照。
+
+### 20.1 新增或更新数据（逐项来源）
+
+| 数据 | 数值 / 原文要点 | 来源与日期 |
+|------|----------------|-----------|
+| `meta.dataCutoff` / `stamp` | **2026-11-26** / **数据截至 2026-11-26** | 本轮写入边界。**只有 BEA 11-25 的 10 月 PCE 与三季度 GDP 二次估计是新 vintage**；其余中国主线、LPR、外溢行情（美债 11-20 / 油价 11-20 / 美元指数 11-20 / 中间价 11-23 / 中债 11-06）保持第 57 期快照 |
+| `meta.builtAt` | **2026-11-26** | 本轮写入日 |
+| 10 月 PCE 价格指数同比 | 全项 **+3.8%**；除食品和能源（核心）**+3.3%** | (1)。From the same month one year ago |
+| 10 月 PCE 价格指数环比 | 全项 **+0.3%**；核心亦 **+0.3%** | (1)。From the preceding month |
+| 10 月个人收入 / DPI / PCE / 储蓄 | 个人收入 **+$201.8 billion（环比 0.7%）**；DPI **+$200.5 billion（0.8%）**；PCE **+$63.8 billion（0.3%）**；个人储蓄 **$1.00 trillion**；储蓄率 **4.1%** | (1)。时间线写入收入环比 +0.7% 与储蓄率 4.1%；未单开 KPI |
+| 10 月实际 PCE | 减少 **$5.8 billion（不足 0.1%）**；同表 October 行 Real PCE **0.0** | (1)。与「不足 0.1%」一致。未写入 KPI / 时间线主句 |
+| 9 月 PCE 价格指数环比（对照，不发明同比修订） | 全项 **0.5**；核心 **0.3** | (1) 同表 September 行。11-25 新闻稿**没有**给出 9 月同比。站内 9 月同比仍以 10-29 读数（核心 +3.1%、整体 +3.6%）为历史叙述 |
+| 三季度实际 GDP 二次估计 | **SAAR +4.3%**；二季度 **+2.2%**；较初值 +3.4% 上修 **0.9** 个百分点 | (2)。季环比折年率，不可与中国同比混比。不要写「创一年最快」 |
+| 三季度 GDP 相关表（二次 vs 初值） | Current-dollar GDP **5.6 → 6.2**；Real final sales to private domestic purchasers **4.9 → 5.8**；Real GDI Second **4.4**；Average of real GDP and real GDI **4.4**；Gross domestic purchases price index **3.0 → 2.7** | (2)。时间线写入对私人国内购买者的实际最终销售 **+5.8%**（亦上修 0.9 个百分点）。其余表内修订不单开 KPI |
+| 三季度 PCE 价格指数（SAAR，二次估计） | 全项 **2.1 → 2.1**（未修订）；除食品和能源 **2.5 → 2.5**（未修订） | (2)。从 2026:Q2 到 2026:Q3 的 SAAR，**不是** 10 月同比 |
+| 当期生产利润 | 三季度增加 **$206.0 billion**（站内写 2060 亿美元）；二季度增加 **$384.0 billion**（3840 亿美元） | (2)。含存货估价与资本消耗调整。写入时间线，不单开 KPI |
+| 下次发布 | **2026-12-23** 08:30 EST：11 月个人收入与支出；三季度 GDP 三次估计 | (1)(2) |
+| `gauges` `price.note` | 「9 月核心 PCE 同比 +3.1%；美国三季度 GDP SAAR +3.4%」→「10 月核心 PCE 同比 +3.3%、整体 +3.8%；美国三季度 GDP 二次估计 SAAR +4.3%」 | (1)(2)。须标 SAAR、不可与中国同比混比。不改其他 gauges（growth 里「尚未有 1—10 月利润稿」仍正确） |
+| KPI `10 月核心 PCE 同比`（原「9 月核心 PCE 同比」更名） | value **+3.3**；foot：环比 +0.3%；整体 PCE 同比 +3.8%、环比 +0.3%；src「美国经济分析局 2026-11-25」；dir **up**（相对站内上一快照 3.1） | (1) |
+| KPI `三季度 GDP（SAAR）` | value **+4.3**；foot：二次估计；季环比折年率。较 10-29 初值 +3.4% 上修 0.9 个百分点；二季度 +2.2%。不可与中国同比混比；src「美国经济分析局 BEA 2026-11-25」；dir **up** | (2) |
+| KPI `12 月加息概率` 及其他 KPI | **不改** | 仍为 10-29 债券市场定价 >90%。不更新油价 / 美债 / 美元指数 / 人民币中间价 / 中债 / 中国月度统计 / LPR |
+| `spillover.usCpiOrPce` | name「美国 10 月核心 PCE 同比」；value **+3.3**；asOf **2026-11-25**；source「美国经济分析局 BEA 2026-11-25」；`sourceUrl` 指向来源 A | (1)。channel：10 月 PCE 价格指数同比 +3.8%、环比 +0.3%，核心同比 +3.3%、环比 +0.3%；保留 11-10 美国 10 月 CPI-U 季调环比 +0.4%、核心 +0.3%、全项与核心 12 个月变动未公布。传导仍写对中国 PPI / 出口价格 |
+| `spillover.usGrowthSaar` | value **+4.3**；asOf **2026-11-25**；source「美国经济分析局 BEA 2026-11-25」；`sourceUrl` 指向来源 B | (2)。channel：二次估计 SAAR +4.3%，较初值 +3.4% 上修 0.9 个百分点；季环比折年率，不可与中国 GDP 同比混比快慢；对中国机电出口订单有方向含义 |
+| 时间线 **2026-10-29** | **一字不改** | 初值 +3.4% 与 9 月 PCE 作为历史保留；当时表述（含「创一年最快」「四个月最高」）不改写 |
+| 时间线 **2026-11-25** | 新增一条（同日同时发布，合并）：美国三季度 GDP 二次估计 SAAR +4.3%，10 月核心 PCE 同比 +3.3% | 插在 2026-11-20 外溢快照之后、2026-11-29 OPEC+ 前瞻之前。无 `future:true` |
+| 时间线 **2026-11-29** OPEC+、**2026-12-09** FOMC | **保持 `future: true`** | 正文不要改成已召开 / 已发布 |
+| 展望卡「美联储」第二条 | 在 11-10 CPI、11-18 纪要之后补 11-25 BEA 的 GDP 二次估计与 10 月 PCE；当前状态写二次估计 +4.3%；10-29 初值 +3.4% 作为「当时公布」保留 | 口径分清：季度 GDP / 季度 PCE 价格指数为 SAAR，10 月 PCE 为同比/环比。保留「标题「近乎锁定」所依据的仍是 10 月 29 日债券市场定价（>90%），本期不更新该概率。本期不另推利率路径。SEP 与点阵图要等到 12 月才更新。」不把新数据解释成「委员会已决定 12 月加息」 |
+| 资源 `?v=` | `data.js` 升至 **60** | `app.js` 保持 57（未改逻辑）；`styles.css` 保持 56 |
+
+### 20.2 本轮口径与表述调整
+
+| # | 调整 | 说明 |
+|---|------|------|
+| 1 | KPI / spillover 核心 PCE 由 9 月同比 +3.1% 改为 10 月同比 +3.3% | 环比 +0.3%；整体同比 +3.8%、环比 +0.3%。不把「四个月最高」套到 10 月（11-25 新闻稿没写） |
+| 2 | KPI / spillover 三季度 GDP 由初值 SAAR +3.4% 改为二次估计 SAAR +4.3% | 须标 SAAR；较初值上修 0.9pct；二季度 +2.2%。不可与中国同比混比。不要写「创一年最快」 |
+| 3 | 时间线新增 **2026-11-25** 合并条；保留 10-29 旧条 | 同日同时发布，不拆成两条。10-29 当时表述不改写 |
+| 4 | 展望卡美联储段补 11-25 官方数 | 口径分清季度 SAAR vs 10 月同比/环比。不更新 12 月加息概率，不另推利率路径 |
+| 5 | `index.html` hero-lede / 三条主线第二条 / 外溢叙事新增「11 月 25 日」段 / methods 来源与口径 | 戳记、description、页脚同步 2026-11-26。不改「第 48 期」。不改紧随其后的「决议后定价」callout 里的 90% / 23bp |
+| 6 | `meta.builtAt` / `dataCutoff` / `stamp` **2026-11-26**；页眉戳记、页脚、`index.html` description 同步 | 戳记与 cutoff 一致。核验文档标明：不是所有序列都刷新到 11-26 |
+| 7 | 资源 `data.js` `?v=60` | 不改 `app.js` 逻辑、不改 schema、不碰 `reading-sample/`、不改 `styles.css` 的 `?v=` |
+| 8 | 11-29 OPEC+、12-09 FOMC 保持 `future:true` | 不更新「12 月加息概率超过 90%」 |
+
+### 20.3 原值 → 本期值（时效更新，不是纠错）
+
+| # | 位置 | 原值 | 本期值 | 性质 | 依据 |
+|---|------|------|--------|------|------|
+| 1 | KPI 核心 PCE | 「9 月核心 PCE 同比」**+3.1**（2026-10-29）；foot 含「四个月最高」 | 「10 月核心 PCE 同比」**+3.3**（2026-11-25）；foot：环比 +0.3%；整体同比 +3.8%、环比 +0.3%。dir **up** | 时效更新 | (1) |
+| 2 | KPI 三季度 GDP（SAAR） | **+3.4**（初值，2026-10-29） | **+4.3**（二次估计，2026-11-25）；较初值上修 0.9pct；二季度 +2.2% | 时效更新 | (2) |
+| 3 | `spillover.usCpiOrPce` | 9 月核心 PCE +3.1，asOf 2026-10-29 | 10 月核心 PCE +3.3，asOf **2026-11-25**；补 `sourceUrl` | 时效更新 | (1) |
+| 4 | `spillover.usGrowthSaar` | +3.4，asOf 2026-10-29；source「美国商务部 BEA 2026-10-29」 | **+4.3**，asOf **2026-11-25**；source「美国经济分析局 BEA 2026-11-25」；补 `sourceUrl` | 时效更新 | (2) |
+| 5 | `gauges` `price.note` | 9 月核心 PCE +3.1%；三季度 GDP SAAR +3.4% | 10 月核心 PCE +3.3%、整体 +3.8%；三季度 GDP 二次估计 SAAR +4.3% | 时效更新 | (1)(2) |
+| 6 | 时间线 | 11-20 外溢快照后直接 11-29 前瞻 | 新增 **2026-11-25** 一条；10-29 旧条保留；11-29 / 12-09 前瞻保留 `future:true` | 时效更新 | (1)(2) |
+| 7 | 展望卡美联储段 | 止于 11-18 纪要 + 10-29 定价 | 补 11-25 二次估计 +4.3% 与 10 月 PCE；当前状态为二次估计 | 时效更新 | (1)(2) |
+| 8 | `index.html` hero / 三条主线 / 外溢叙事 / methods | 三季度 GDP SAAR +3.4%；9 月核心 PCE +3.1% / 整体 +3.6%，为四个月最高；戳记 11-23 | 二次估计 SAAR +4.3%；10 月核心 PCE +3.3%、整体 +3.8%（不套「四个月最高」）；新增 11-25 段；戳记 **2026-11-26** | 时效 + 口径 | (1)(2) |
+| 9 | `meta.dataCutoff` / `stamp` / `builtAt` | 均为 2026-11-23 | 均为 **2026-11-26** | 时效更新（戳记随写入日） | 本轮写入日 |
+| 10 | 资源 `data.js?v=` | 59 | **60** | 缓存穿透 | 本轮改 `data.js` |
+| 11 | KPI `12 月加息概率` / 油价 / 美债 / 美元 / 中间价 / 中债 / 中国月度 / LPR | 第 57 期快照 | **不变** | 本轮未覆盖 | 填数笔记明确不更新 |
+
+### 20.4 口径注记
+
+1. **`dataCutoff` = 2026-11-26 不等于所有序列都刷新到 11-26。** 只有 BEA 11-25 的 10 月 PCE 与三季度 GDP 二次估计是新 vintage。其余中国主线、LPR、外溢行情（美债 11-20 / 油价 11-20 / 美元指数 11-20 / 中间价 11-23 / 中债 11-06）保持第 57 期快照。
+2. **10 月 PCE 是同比 / 环比，不是 SAAR。** 同比全项 +3.8%、核心 +3.3%；环比全项与核心均为 +0.3%。
+3. **三季度实际 GDP 二次估计是 SAAR（季环比折年率）。** +4.3%；初值 +3.4%，上修 0.9pct；二季度 +2.2%。不可与中国 GDP 同比比快慢。不要写「创一年最快」。
+4. **季度 PCE 价格指数二次估计仍为 +2.1% / 核心 +2.5%（未修订）。** 这是从 2026:Q2 到 2026:Q3 的 SAAR，**不是** 10 月同比。文案必须分清。
+5. **未把 9 月同比写成已修订。** 11-25 新闻稿同表 September 行只有环比 0.5 / 0.3，没有给出 9 月同比。9 月同比仍以 10-29 读数（核心 +3.1%、整体 +3.6%）作为历史叙述。不改写 10-29 时间线条。
+6. **未更新 12 月加息概率。** KPI 仍为 10-29 债券市场定价 >90%。不把 11-25 新数据解释成「委员会已决定 12 月加息」。本期不另推利率路径。
+7. **10-29 时间线条保留当时表述。** 「创一年最快」「四个月最高」是 10-29 当日历史叙述，本轮不改写、也不套到 10 月 PCE 或二次估计。
+8. **中美口径。** 主线仍是中国；美国 / 全球只作外溢。不引入中美对等对照。传导写对中国 PPI / 出口价格 / 机电出口订单，不写成美国专题。
+9. **权益锚 asOf 仍为 2026-10-30**，不改估值数字。
+
+### 20.5 本轮未纳入 / 仍须注意的项
+
+1. **11-25 央行 MLF / 7 天逆回购**：第 229 号公告正文本轮未独立打开核对；且为固定数量、利率招标、多重价位中标，不得沿用 10-26 的单一「操作利率 2.00%」写法。**不写入**。
+2. **11-24 流通领域旬报**：**不写入**。
+3. **11-27 规上工业利润**：尚未发布。增长 gauge「尚未有 1—10 月利润稿」保持。
+4. **今晚 24 时成品油调价窗口**：尚未发布，不写入。
+5. **12 月加息概率**：仍为 10-29 债券市场定价 >90%，本期不更新。
+6. **油价 / 美债 / 美元指数 / 人民币中间价 / 中债 / 中国月度统计 / LPR**：保持第 57 期快照，不刷新。
+7. **11-29 OPEC+、12-09 FOMC**：仍为 `future:true` 前瞻，不改成已召开 / 已发布。
+8. **9 月 PCE 同比**：不写成已修订。不采用第三方「9 月同比修订为 3.7%」。
+9. **Current-dollar GDP / Real GDI / Gross domestic purchases price index 等表内修订**：已在核验表登记原文，除时间线已写的私人国内购买者实际最终销售 +5.8% 外，不单开 KPI。
+10. **`docs/DATA-SCHEMA.md` / `reading-sample/` / `app.js` 逻辑 / `styles.css`**：**未触碰**。不改「第 48 期」。
+11. **第 54 / 55 / 56 / 57 期已写入的中国主线统计、LPR、外溢行情与美联储纪要数字**：除本轮明确替换的 PCE / GDP 当前状态外，不改。
+
+---
+
 *本文件为站点数据核验的工作记录，公开数据整理与观点转述不构成任何投资建议。*
